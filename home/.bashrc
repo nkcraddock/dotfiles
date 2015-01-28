@@ -123,3 +123,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# push public key to remote servers
+function ssh-pushkey {
+  ssh $1 "echo '`cat ~/.ssh/id_rsa.pub`' >> ~/.ssh/authorized_keys"
+}
