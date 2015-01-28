@@ -13,7 +13,6 @@ if [ -f ~/.bash_local ]; then
     . ~/.bash_local
 fi
 
-export GOROOT=/usr/local/go
 export GOPATH=$HOME/dev/go
 PATH=$GOROOT/bin:$PATH
 PATH=$JAVA_HOME/bin:$PATH
