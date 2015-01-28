@@ -14,7 +14,7 @@ if [ -f ~/.bash_local ]; then
 fi
 
 export GOPATH=$HOME/dev/go
-PATH=$GOROOT/bin:$PATH
+PATH=/usr/local/go/bin:$PATH
 PATH=$JAVA_HOME/bin:$PATH
 PATH=$HOME/bin:$PATH
 PATH=$JAVA_HOME/bin:$PATH
