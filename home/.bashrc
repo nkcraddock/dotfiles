@@ -2,8 +2,10 @@ os=`uname`
 
 if [[ "$os" == 'Linux' ]]; then
   JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:bin/javac::")
+  alias ls='ls --color=auto'
 elif [[ "$os" == 'Darwin' ]]; then
   JAVA_HOME=`/usr/libexec/java_home -v1.7`
+  alias ls='ls -G'
 fi
 
 # run local bash stuff (pc-specific aliases and such)
@@ -24,7 +26,6 @@ PATH=$PATH:$GOPATH/bin
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-alias ls='ls --color=auto'
 
 alias st='git status'
 alias hs='homesick'
