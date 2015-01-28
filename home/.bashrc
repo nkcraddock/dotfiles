@@ -1,3 +1,11 @@
+os=`uname`
+
+if [[ "$os" == 'Linux' ]]; then
+  JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:bin/javac::")
+elif [[ "$os" == 'Darwin' ]]; then
+  JAVA_HOME=`/usr/libexec/java_home -v1.7`
+fi
+
 # run local bash stuff (pc-specific aliases and such)
 if [ -f ~/.bash_local ]; then
     . ~/.bash_local
@@ -20,7 +28,7 @@ alias ls='ls -G'
 
 alias st='git status'
 alias hs='homesick'
-
+alias hsgit='cd ~/.homesick/repos/dotfiles'
 
 # If not running interactively, don't do anything
 case $- in
