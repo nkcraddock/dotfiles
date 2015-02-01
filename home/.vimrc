@@ -11,6 +11,7 @@ Plugin 'gmarik/Vundle.vim'
 " My Bundles here:
 "
 " original repos on github
+Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
 Plugin 'desert-warm-256'
 Plugin 'jinfield/vim-nginx'
@@ -22,6 +23,7 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'elzr/vim-json'
 Plugin 'fatih/vim-go'
 Plugin 'scrooloose/nerdcommenter'
+"
 "
 " Brief help
 " :BundleList          - list configured bundles
@@ -43,8 +45,12 @@ syntax on
 map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
 map <silent> <LocalLeader>gi :GoImports<CR>
 map <silent> <LocalLeader>mm :!make<CR>
+map <silent> <LocalLeader>mt :!make test<CR>
+map <silent> <LocalLeader>mr :!make run<CR>
 map <silent> <LocalLeader>gr :GoRun<CR>
 map <silent> <LocalLeader>gt :!go test ./...<CR>
+map <silent> <LocalLeader>rr :!rake<CR>
+map <silent> <LocalLeader>rt :!rake test<CR>
 setlocal isk+=?
 
 nno <leader>t :<C-u>AsyncFinder<CR>
