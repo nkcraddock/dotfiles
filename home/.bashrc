@@ -126,3 +126,8 @@ fi
 function ssh-pushkey {
   ssh $1 "echo '`cat ~/.ssh/id_rsa.pub`' >> ~/.ssh/authorized_keys"
 }
+
+# add something to gitignore
+function gi {
+  echo "$1" >> .gitignore
+}
