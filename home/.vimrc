@@ -8,9 +8,7 @@ set shell=/bin/bash
 " required! 
 Plugin 'gmarik/Vundle.vim'
 
-" My Bundles here:
-"
-" original repos on github
+" plugins
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
 Plugin 'desert-warm-256'
@@ -23,19 +21,6 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'elzr/vim-json'
 Plugin 'fatih/vim-go'
 Plugin 'scrooloose/nerdcommenter'
-"
-"
-" Brief help
-" :BundleList          - list configured bundles
-" :BundleInstall(!)    - install(update) bundles
-" :BundleSearch(!) foo - search(or refresh cache first) for foo
-" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
-"
-" see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Bundle command are not allowed..
-"
-
-colorscheme desert-warm-256
 
 "Finish vundle setup
 filetype plugin indent on     " required!
