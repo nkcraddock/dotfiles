@@ -131,3 +131,17 @@ function ssh-pushkey {
 function gi {
   echo "$1" >> .gitignore
 }
+
+# grab the ip of a docker contanier by name
+function dockerip {
+  sudo docker inspect --format '{{ .NetworkSettings.IPAddress }}' $1
+}
+
+# ssh to a docker container by name using the insecure key
+function scraw {
+  ssh scraw@$(dockerip $1) -i ~/.ssh/docker_insecure_key
+}
+
+function scraw-push-ssh {
+  scp -i ~/.ssh/docker_insecure_key $2 scraw@$(dockerip $1):~/.ssh/id_rsa
+}
