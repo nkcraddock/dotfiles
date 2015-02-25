@@ -19,3 +19,5 @@
   mt = mergetool
   st = status
   spull = !git stash save && git pull --rebase && git stash pop
+[core]
+	editor = /usr/bin/vim

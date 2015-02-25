@@ -145,3 +145,8 @@ function scraw {
 function scraw-push-ssh {
   scp -i ~/.ssh/docker_insecure_key $2 scraw@$(dockerip $1):~/.ssh/id_rsa
 }
+
+function docker-clean {
+  docker rm $(docker ps -a -q)
+  docker rmi $(docker images | grep "^<none>" | awk "{print $3}")
+}
