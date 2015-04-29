@@ -14,12 +14,11 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'desert-warm-256'
 Plugin 'jinfield/vim-nginx'
 Plugin 'bling/vim-airline'
+Plugin 'fatih/vim-go'
 Plugin 'kien/ctrlp.vim'
 Plugin 'john2x/flatui.vim'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'kchmck/vim-coffee-script'
-Plugin 'elzr/vim-json'
-Plugin 'fatih/vim-go'
 Plugin 'scrooloose/nerdcommenter'
 
 "Finish vundle setup
@@ -43,11 +42,12 @@ nno <leader>t :<C-u>AsyncFinder<CR>
 "Preferences
 set hlsearch
 set number
-set textwidth=0 nosmartindent tabstop=4 shiftwidth=2 softtabstop=2 expandtab
+set textwidth=0 nosmartindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 let &t_Co=256
 set backspace=2
 set hidden
 set wildignore+=*.class,*.jar,.git,*.swp
+let g:ctrlp_max_files=0
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 let g:ctrlp_show_hidden = 1

@@ -1,8 +1,16 @@
 {
+	"folder_exclude_patterns":
+	[
+		".git",
+		"node_modules",
+		".*.swp",
+		".*.swo"
+	],
 	"hot_exit": false,
 	"ignored_packages":
 	[
 		"Vintage"
 	],
-	"remember_open_files": false
+	"remember_open_files": false,
+	"tab_size": 2
 }
