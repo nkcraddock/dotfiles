@@ -1,11 +1,13 @@
-set nocompatible               " be iMproved
-filetype off                   " required!
+" Use vim
+set nocompatible
 
+" use bash
+set shell=/bin/bash
+
+" vundle
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
 set shell=/bin/bash
-" let Vundle manage Vundle
-" required! 
 Plugin 'gmarik/Vundle.vim'
 
 " plugins
@@ -36,17 +38,43 @@ map <silent> <LocalLeader>gt :!go test ./...<CR>
 map <silent> <LocalLeader>rr :!rake<CR>
 map <silent> <LocalLeader>rt :!rake test<CR>
 setlocal isk+=?
-
 nno <leader>t :<C-u>AsyncFinder<CR>
 
 "Preferences
-set hlsearch
+set ruler
+set history=50
+set showcmd
+set incsearch
+set autowrite
+set nobackup
+set nowritebackup
+set noswapfile
 set number
-set textwidth=0 nosmartindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
-let &t_Co=256
+set textwidth=0 tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+set t_Co=256
 set backspace=2
 set hidden
 set wildignore+=*.class,*.jar,.git,*.swp
+set noshowmode
+
+" search highlighting
+set hlsearch
+nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+
+
+" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+if executable('ag')
+  " Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+" ctrlp
 let g:ctrlp_max_files=0
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
