@@ -87,7 +87,8 @@ fi
 source ~/.git-prompt.sh
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWCOLORHINTS=1
-PROMPT_COMMAND='__git_ps1 "\[\e[01;34m\]$PWD\[\e[0m\]" "\n\h\$ "'
+PROMPT_DIRTRIM=5
+PROMPT_COMMAND='__git_ps1 "\[\e[01;34m\]\w\[\e[0m\]" "\n\h\$ "'
 
 unset color_prompt force_color_prompt
 
