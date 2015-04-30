@@ -1,8 +1,6 @@
 " Use vim
 set nocompatible
-
-" use bash
-set shell=/bin/bash
+filetype off
 
 " vundle
 set rtp+=~/.vim/bundle/Vundle.vim
