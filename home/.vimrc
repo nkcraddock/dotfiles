@@ -26,7 +26,6 @@ filetype plugin indent on     " required!
 syntax on
 
 "Custom keymaps
-map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
 map <silent> <LocalLeader>gi :GoImports<CR>
 map <silent> <LocalLeader>mm :!make<CR>
 map <silent> <LocalLeader>mt :!make test<CR>
@@ -37,6 +36,17 @@ map <silent> <LocalLeader>rr :!rake<CR>
 map <silent> <LocalLeader>rt :!rake test<CR>
 setlocal isk+=?
 nno <leader>t :<C-u>AsyncFinder<CR>
+
+"NERDTree Workaround - otherwise if you :bd the nt buffer it gets saddy
+map <silent> <LocalLeader>nt :call g:WorkaroundNERDTreeToggle()<CR>
+
+function! g:WorkaroundNERDTreeToggle()
+  if exists("b:NERDTree")
+    :NERDTreeToggle
+  else
+    :NERDTree
+  endif
+endfunction
 
 "Preferences
 set ruler
