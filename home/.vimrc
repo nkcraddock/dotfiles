@@ -85,7 +85,7 @@ endif
 " ctrlp
 let g:ctrlp_max_files=0
 let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git|build\'
 let g:ctrlp_show_hidden = 1
 let g:asyncfinder_ignore_files = "['*.swp', '*.class']"
 let g:asyncfinder_ignore_dirs = "['*.AppleDouble*','*.DS_Store*','*.git*','*.hg*','*.bzr*','*target*']"
@@ -96,4 +96,8 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-
+" Window resizing mappings /*{{{*/
+nnoremap <S-Up> <C-w>+<CR>
+nnoremap <S-Down> <C-w>-<CR>
+nnoremap <S-Left> <C-w><<CR>
+nnoremap <S-Right> <C-w>><CR>
