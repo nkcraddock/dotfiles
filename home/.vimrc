@@ -20,6 +20,8 @@ Plugin 'john2x/flatui.vim'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-easytags'
 
 "Finish vundle setup
 filetype plugin indent on     " required!
@@ -89,6 +91,9 @@ let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git|build\'
 let g:ctrlp_show_hidden = 1
 let g:asyncfinder_ignore_files = "['*.swp', '*.class']"
 let g:asyncfinder_ignore_dirs = "['*.AppleDouble*','*.DS_Store*','*.git*','*.hg*','*.bzr*','*target*']"
+
+" easytags
+let g:easytags_async = 1
 
 " Sane window navigation
 nnoremap <C-h> <C-w>h
