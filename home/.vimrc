@@ -9,19 +9,17 @@ set shell=/bin/bash
 Plugin 'gmarik/Vundle.vim'
 
 " plugins
-Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/nerdtree'
-Plugin 'desert-warm-256'
-Plugin 'jinfield/vim-nginx'
-Plugin 'bling/vim-airline'
-Plugin 'fatih/vim-go'
-Plugin 'kien/ctrlp.vim'
-Plugin 'john2x/flatui.vim'
-Plugin 'digitaltoad/vim-jade'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-easytags'
+Plugin 'tpope/vim-fugitive'       " git
+Plugin 'scrooloose/nerdtree'      " nerdtree
+Plugin 'desert-warm-256'          " colors
+Plugin 'kien/ctrlp.vim'           " ctrlp
+Plugin 'scrooloose/nerdcommenter' " comments \ci
+Plugin 'xolox/vim-misc'           " necessary for easytags
+Plugin 'xolox/vim-easytags'       " ctags (:UpdateTags)
+
+Plugin 'jinfield/vim-nginx'       " nginx config file
+Plugin 'fatih/vim-go'             " golang
+
 
 "Finish vundle setup
 filetype plugin indent on     " required!
@@ -29,15 +27,14 @@ syntax on
 
 "Custom keymaps
 map <silent> <LocalLeader>gi :GoImports<CR>
+map <silent> <LocalLeader>gr :GoRun<CR>
+map <silent> <LocalLeader>gt :!go test ./...<CR>
 map <silent> <LocalLeader>mm :!make<CR>
 map <silent> <LocalLeader>mt :!make test<CR>
 map <silent> <LocalLeader>mr :!make run<CR>
-map <silent> <LocalLeader>gr :GoRun<CR>
-map <silent> <LocalLeader>gt :!go test ./...<CR>
 map <silent> <LocalLeader>rr :!rake<CR>
 map <silent> <LocalLeader>rt :!rake test<CR>
 setlocal isk+=?
-nno <leader>t :<C-u>AsyncFinder<CR>
 
 "NERDTree Workaround - otherwise if you :bd the nt buffer it gets saddy
 map <silent> <LocalLeader>nt :call g:WorkaroundNERDTreeToggle()<CR>
@@ -85,15 +82,16 @@ if executable('ag')
 endif
 
 " ctrlp
+let g:ctrlp_extensions = ['tag' ]
 let g:ctrlp_max_files=0
 let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git|build\'
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|.git\|build\'
 let g:ctrlp_show_hidden = 1
-let g:asyncfinder_ignore_files = "['*.swp', '*.class']"
-let g:asyncfinder_ignore_dirs = "['*.AppleDouble*','*.DS_Store*','*.git*','*.hg*','*.bzr*','*target*']"
 
 " easytags
 let g:easytags_async = 1
+let g:easytags_file = "./tags"
+let g:easytags_opts = ['--tag-relative=yes']
 
 " Sane window navigation
 nnoremap <C-h> <C-w>h
