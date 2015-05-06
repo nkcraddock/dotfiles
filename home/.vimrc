@@ -33,9 +33,9 @@ map <silent> <LocalLeader>gi :GoImports<CR>
 map <silent> <LocalLeader>gb :Gbrowse<CR>
 map <silent> <LocalLeader>gs :Gstatus<CR>
 map <silent> <LocalLeader>gd :Gvdiff<CR>
-map <silent> <LocalLeader>mm :!make<CR>
-map <silent> <LocalLeader>mt :!make test<CR>
-map <silent> <LocalLeader>mr :!make run<CR>
+map <silent> <LocalLeader>mm :make<CR>
+map <silent> <LocalLeader>mt :make test<CR>
+map <silent> <LocalLeader>mr :make run<CR>
 map <silent> <LocalLeader>rr :!rake<CR>
 map <silent> <LocalLeader>rt :!rake test<CR>
 setlocal isk+=?
