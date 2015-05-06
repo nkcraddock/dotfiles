@@ -16,6 +16,9 @@ Plugin 'kien/ctrlp.vim'           " ctrlp
 Plugin 'scrooloose/nerdcommenter' " comments \ci
 Plugin 'xolox/vim-misc'           " necessary for easytags
 Plugin 'xolox/vim-easytags'       " ctags (:UpdateTags)
+Plugin 'SirVer/ultisnips'         " snippets engine
+Plugin 'honza/vim-snippets'       " le actual snippets
+Plugin 'altercation/vim-colors-solarized' " pretties
 
 Plugin 'jinfield/vim-nginx'       " nginx config file
 Plugin 'fatih/vim-go'             " golang
@@ -27,8 +30,9 @@ syntax on
 
 "Custom keymaps
 map <silent> <LocalLeader>gi :GoImports<CR>
-map <silent> <LocalLeader>gr :GoRun<CR>
-map <silent> <LocalLeader>gt :!go test ./...<CR>
+map <silent> <LocalLeader>gb :Gbrowse<CR>
+map <silent> <LocalLeader>gs :Gstatus<CR>
+map <silent> <LocalLeader>gd :Gvdiff<CR>
 map <silent> <LocalLeader>mm :!make<CR>
 map <silent> <LocalLeader>mt :!make test<CR>
 map <silent> <LocalLeader>mr :!make run<CR>
@@ -93,6 +97,18 @@ let g:easytags_async = 1
 let g:easytags_file = "./tags"
 let g:easytags_opts = ['--tag-relative=yes']
 
+" ultisnips 
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsListSnippets="<s-tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+" solarized
+set background=dark
+let g:solarized_termcolors=256
+colorscheme solarized
+
+
 " Sane window navigation
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -100,7 +116,7 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 " Window resizing mappings /*{{{*/
-nnoremap <S-Up> <C-w>+<CR>
-nnoremap <S-Down> <C-w>-<CR>
-nnoremap <S-Left> <C-w><<CR>
-nnoremap <S-Right> <C-w>><CR>
+nnoremap <S-Up> <C-w>+
+nnoremap <S-Down> <C-w>-
+nnoremap <S-Left> <C-w><
+nnoremap <S-Right> <C-w>>
