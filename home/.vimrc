@@ -16,9 +16,8 @@ Plugin 'kien/ctrlp.vim'           " ctrlp
 Plugin 'scrooloose/nerdcommenter' " comments \ci
 Plugin 'xolox/vim-misc'           " necessary for easytags
 Plugin 'xolox/vim-easytags'       " ctags (:UpdateTags)
-Plugin 'SirVer/ultisnips'         " snippets engine
-Plugin 'honza/vim-snippets'       " le actual snippets
 Plugin 'altercation/vim-colors-solarized' " pretties
+Plugin 'digitaltoad/vim-jade'     " jade
 
 Plugin 'jinfield/vim-nginx'       " nginx config file
 Plugin 'fatih/vim-go'             " golang
@@ -39,6 +38,13 @@ map <silent> <LocalLeader>mr :make! run<CR>
 map <silent> <LocalLeader>rr :!rake<CR>
 map <silent> <LocalLeader>rt :!rake test<CR>
 setlocal isk+=?
+
+
+" local replace
+nnoremap gr gd[{V%::s/<C-R>///gc<left><left><left>
+
+" global replace
+nnoremap gR gD:%s/<C-R>///gc<left><left><left>
 
 "NERDTree Workaround - otherwise if you :bd the nt buffer it gets saddy
 map <silent> <LocalLeader>nt :call g:WorkaroundNERDTreeToggle()<CR>
@@ -65,7 +71,7 @@ set textwidth=0 tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 set t_Co=256
 set backspace=2
 set hidden
-set wildignore+=*.class,*.jar,.git,*.swp
+set wildignore+=*.class,*.jar,.git,*.swp,node_modules
 set noshowmode
 
 " search highlighting
@@ -89,7 +95,8 @@ endif
 let g:ctrlp_extensions = ['tag' ]
 let g:ctrlp_max_files=0
 let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|.git\|build\'
+"let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|.git\|build\|'
+let g:ctrlp_custom_ignore = '\v[\/]\.(DS_Storegit|hg|svn|optimized|compiled|node_modules)$'
 let g:ctrlp_show_hidden = 1
 
 " easytags
@@ -107,6 +114,13 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 set background=dark
 let g:solarized_termcolors=256
 colorscheme solarized
+
+" vim-go
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
 
 
 " Sane window navigation
