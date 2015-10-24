@@ -1,3 +1,4 @@
+#!/bin/bash
 os=`uname`
 
 if [[ "$os" == 'Linux' ]]; then
@@ -14,7 +15,7 @@ if [ -f ~/.bash_local ]; then
 fi
 
 export GOPATH=$HOME/dev/go
-PATH=/usr/local/go/bin:$PATH
+PATH=/usr/local/bin:/usr/local/go/bin:$PATH
 PATH=$JAVA_HOME/bin:$PATH
 PATH=$HOME/bin:$PATH
 PATH=$JAVA_HOME/bin:$PATH
@@ -123,6 +124,15 @@ if ! shopt -oq posix; then
   fi
 fi
 
+
+# Avoid duplicates
+export HISTCONTROL=ignoredups:erasedups  
+# When the shell exits, append to the history file instead of overwriting it
+shopt -s histappend
+
+# After each command, append to the history file and reread it
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+
 # push public key to remote servers
 function ssh-pushkey {
   ssh $1 "echo '`cat ~/.ssh/id_rsa.pub`' >> ~/.ssh/authorized_keys"
@@ -135,7 +145,7 @@ function gi {
 
 # grab the ip of a docker contanier by name
 function dockerip {
-  sudo docker inspect --format '{{ .NetworkSettings.IPAddress }}' $1
+  docker inspect --format '{{ .NetworkSettings.IPAddress }}' $1
 }
 
 # ssh to a docker container by name using the insecure key
@@ -150,4 +160,16 @@ function scraw-push-ssh {
 function docker-clean {
   docker rm $(docker ps -a -q)
   docker rmi $(docker images | grep "^<none>" | awk "{print $3}")
+}
+
+# set up resty if it's there
+if [ -e ~/.restyrc ]; then
+    . ~/.restyrc
+fi
+
+# Connect to $1 with credentials $1 : $2.
+# Set up for JSON. Don't encode the request URL. Ignore key warnings. 
+function resty-auth {
+  echo "Connecting to $1 with $2"
+  resty $1 -H "Content-Type: application/json" -H "Accept: application/json" -Q -k -u $2:$3
 }

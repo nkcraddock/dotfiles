@@ -20,5 +20,18 @@
   st = status
   spull = !git stash save && git pull --rebase && git stash pop
 [core]
-	editor = /usr/bin/vim
+  autocrlf = input
+	editor = /usr/local/bin/mvim -v
 	excludesfile = ~/.gitignore
+  pager = less -X
+[branch]
+  autosetuprebase = always
+[diff]
+  tool = vimdiff
+
+[url "git@bitbucket.org:"]
+      insteadOf = bb:
+  
+[url "git@github.com:"]
+      insteadOf = gh:
+
