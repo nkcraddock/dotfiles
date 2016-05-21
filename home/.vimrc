@@ -24,7 +24,7 @@ Plugin 'xolox/vim-easytags'       " ctags (:UpdateTags)
 Plugin 'xolox/vim-misc'           " necessary for easytags
 Plugin 'Valloric/YouCompleteMe'   " auto complete
 Plugin 'rking/ag.vim'             " ag
-Plugin 'bling/vim-airline'        " status bar
+Plugin 'vim-airline/vim-airline-themes' "Airline!
 Plugin 'majutsushi/tagbar'        "tag bar!
 Plugin 'milkypostman/vim-togglelist' " toggle quickfix list
 Plugin 'sirver/ultisnips'         " snippets engine
@@ -36,6 +36,7 @@ Plugin 'elzr/vim-json'            " Thank you, Json
 Plugin 'digitaltoad/vim-jade'     " jade
 Plugin 'fatih/vim-go'             " golang
 Plugin 'vim-ruby/vim-ruby'        " ruby
+Plugin 'elixir-lang/vim-elixir'   " elixir
 
 " pretties
 Plugin 'altercation/vim-colors-solarized'
@@ -44,6 +45,7 @@ Plugin 'altercation/vim-colors-solarized'
 "Finish vundle setup
 filetype plugin indent on 
 syntax on
+
 
 "Custom keymaps
 map <silent> <LocalLeader>mm :make!<CR>
@@ -56,6 +58,12 @@ map <silent> <LocalLeader>jj  :%w !pbcopy<CR>
 nmap <silent> <LEFT> :cprev<CR>
 nmap <silent> <RIGHT> :cnext<CR>
 setlocal isk+=?
+
+" Filetype keymaps
+autocmd Filetype elixir map <silent> <LocalLeader>t :!mix test<CR>
+autocmd Filetype elixir map <silent> <LocalLeader>r :!iex -S mix<CR>
+
+"vim 
 
 " buffers
 map <silent> <LocalLeader><LocalLeader> :ls<CR>
@@ -92,7 +100,7 @@ set nobackup
 set nowritebackup
 set noswapfile
 set number
-set textwidth=0 tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+set textwidth=0 tabstop=2 shiftwidth=2 softtabstop=2 noexpandtab
 set t_Co=256
 set backspace=2
 set hidden
