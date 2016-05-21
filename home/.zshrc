@@ -37,14 +37,14 @@ alias la='ls -A'
 alias l='ls -CF'
 alias st='git status'
 
+# other aliases
+alias hs='homesick'
+
 # quickly add patterns to the local gitignore
 function gi {
   echo "$1" >> .gitignore
 }
 
-
 # import local stuff
 source ~/.zsh_local
 
-# set up docker machine
-eval "$(docker-machine env dev)"
