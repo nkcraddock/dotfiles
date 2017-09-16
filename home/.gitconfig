@@ -21,7 +21,7 @@
   spull = !git stash save && git pull --rebase && git stash pop
 [core]
   autocrlf = input
-	editor = /usr/local/bin/mvim -v
+	editor = /usr/bin/vim -v
 	excludesfile = ~/.gitignore
   pager = less -X
 [branch]
