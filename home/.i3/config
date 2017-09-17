@@ -180,7 +180,10 @@ bar {
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 
-# Pulse Audio controls
+# Pulse Audio controls 
+bindsym $mod+ctrl+plus exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym $mod+ctrl+minus exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym $mod+ctrl+0 exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
@@ -194,7 +197,9 @@ bindsym $mod+Ctrl+Left exec "dbus-send --print-reply --dest=org.mpris.MediaPlaye
 ## custom command shortcuts
 # start a terminal with return or 0
 bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Ctrl+0 exec i3-sensible-terminal
+
+# reset workspace 1 to hacker layout
+bindsym $mod+Ctrl+t workspace 1, focus parent, focus parent, focus parent, kill, exec "~/.i3/wk1"
 
 # start chrome with 9
 bindsym $mod+Ctrl+9 exec google-chrome
@@ -205,5 +210,6 @@ bindsym --release $mod+z exec scrot -s ~/Downloads/Screenshot%Y-%m-%d%H:%M:%S.pn
 # on startup, fix display arrangement and load the workspace 1 layout
 exec --no-startup-id "xrandr --output $monitor_one --mode 1920x1080 --pos 0x0 --rotate normal --output $monitor_two --mode 1920x1080 --right-of HDMI-0 --rotate normal && ~/.i3/wk1"
 
-
+# window settings for specific applications
+for_window [class="Pavucontrol"] floating enable
 

@@ -1,5 +1,4 @@
 #!/bin/bash
-sleep 5
 i3-msg "workspace 1;"
 i3-msg "focus parent, focus parent, focus parent, focus parent, focus parent, focus parent, focus parent, focus parent, focus parent, focus parent, kill"
 i3-msg "append_layout /home/nathan/.i3/workspace-1.json"
