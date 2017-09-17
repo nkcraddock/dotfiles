@@ -28,9 +28,6 @@ workspace 8 output $monitor_two
 workspace 9 output $monitor_two
 workspace 10 output $monitor_two
 
-# Always open chrome in 10
-assign [class="Google-chrome" instance="google-chrome"] 10
-
 # Colors from solarized
 set $lockcolor 1c1c1c
 set $clr_bg  #1c1c1c
@@ -201,6 +198,9 @@ bindsym $mod+Ctrl+0 exec i3-sensible-terminal
 
 # start chrome with 9
 bindsym $mod+Ctrl+9 exec google-chrome
+
+# take a screenshot
+bindsym --release $mod+z exec scrot -s ~/Downloads/Screenshot%Y-%m-%d%H:%M:%S.png
 
 # on startup, fix display arrangement and load the workspace 1 layout
 exec --no-startup-id "xrandr --output $monitor_one --mode 1920x1080 --pos 0x0 --rotate normal --output $monitor_two --mode 1920x1080 --right-of HDMI-0 --rotate normal && ~/.i3/wk1"
