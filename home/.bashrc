@@ -14,13 +14,16 @@ if [ -f ~/.bash_local ]; then
     . ~/.bash_local
 fi
 
+set -o vi
+
 export GOPATH=$HOME/dev/go
-PATH=/usr/local/bin:/usr/local/go/bin:$PATH
-PATH=$JAVA_HOME/bin:$PATH
-PATH=$HOME/bin:$PATH
-PATH=$JAVA_HOME/bin:$PATH
-PATH=$PATH:$HOME/bin
-PATH=$PATH:$GOPATH/bin
+export PATH=/usr/local/bin:/usr/local/go/bin:$PATH
+export PATH=$JAVA_HOME/bin:$PATH
+export PATH=$HOME/bin:$PATH
+export PATH=$JAVA_HOME/bin:$PATH
+export PATH=$PATH:$HOME/bin
+export PATH=$PATH:$GOPATH/bin
+
 
 # common aliases 
 alias ll='ls -alF'
@@ -28,8 +31,13 @@ alias la='ls -A'
 alias l='ls -CF'
 
 alias st='git status'
-alias hs='homesick'
+alias hs='homeshick'
 alias hsgit='cd ~/.homesick/repos/dotfiles'
+
+# Set up homeshick
+if [ -f ~/.homesick/repos/homeshick/homeshick.sh ]; then
+    . ~/.homesick/repos/homeshick/homeshick.sh
+fi
 
 # If not running interactively, don't do anything
 case $- in
@@ -133,28 +141,9 @@ shopt -s histappend
 # After each command, append to the history file and reread it
 export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
 
-# push public key to remote servers
-function ssh-pushkey {
-  ssh $1 "echo '`cat ~/.ssh/id_rsa.pub`' >> ~/.ssh/authorized_keys"
-}
-
 # add something to gitignore
 function gi {
   echo "$1" >> .gitignore
-}
-
-# grab the ip of a docker contanier by name
-function dockerip {
-  docker inspect --format '{{ .NetworkSettings.IPAddress }}' $1
-}
-
-# ssh to a docker container by name using the insecure key
-function scraw {
-  ssh scraw@$(dockerip $1) -i ~/.ssh/docker_insecure_key
-}
-
-function scraw-push-ssh {
-  scp -i ~/.ssh/docker_insecure_key $2 scraw@$(dockerip $1):~/.ssh/id_rsa
 }
 
 function docker-clean {
@@ -162,14 +151,14 @@ function docker-clean {
   docker rmi $(docker images | grep "^<none>" | awk "{print $3}")
 }
 
-# set up resty if it's there
-if [ -e ~/.restyrc ]; then
-    . ~/.restyrc
+# pyenv setup
+export PYENV_ROOT=$HOME/.pyenv
+export PATH=$PYENV_ROOT/bin:$PATH
+
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
 fi
 
-# Connect to $1 with credentials $1 : $2.
-# Set up for JSON. Don't encode the request URL. Ignore key warnings. 
-function resty-auth {
-  echo "Connecting to $1 with $2"
-  resty $1 -H "Content-Type: application/json" -H "Accept: application/json" -Q -k -u $2:$3
-}
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

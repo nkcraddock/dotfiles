@@ -27,9 +27,6 @@ Plugin 'rking/ag.vim'             " ag
 Plugin 'vim-airline/vim-airline-themes' "Airline!
 Plugin 'majutsushi/tagbar'        "tag bar!
 Plugin 'milkypostman/vim-togglelist' " toggle quickfix list
-Plugin 'sirver/ultisnips'         " snippets engine
-Plugin 'honza/vim-snippets'       " snippets
-Plugin 'ervandew/supertab'        " supertab (so ultisips and ycm play nice)
 
 " language support
 Plugin 'elzr/vim-json'            " Thank you, Json
@@ -145,12 +142,6 @@ let g:ctrlp_show_hidden = 1
 let g:easytags_async = 1
 let g:easytags_file = "./tags"
 let g:easytags_opts = ['--tag-relative=yes']
-
-" ultisnips 
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsListSnippets="<s-tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " solarized
 set background=dark

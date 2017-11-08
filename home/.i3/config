@@ -13,8 +13,8 @@
 set $mod Mod4
 
 # configure monitors
-set $monitor_one HDMI-0
-set $monitor_two DVI-D-0
+set $monitor_one HDMI-1
+set $monitor_two DVI-D-1
 
 # configure workspaces
 workspace 1 output $monitor_one
@@ -27,6 +27,11 @@ workspace 7 output $monitor_two
 workspace 8 output $monitor_two
 workspace 9 output $monitor_two
 workspace 10 output $monitor_two
+
+# set up the bar
+bar {
+	status_command i3status --config ~/.i3status.conf
+}
 
 # Colors from solarized
 set $lockcolor 1c1c1c
@@ -170,11 +175,6 @@ bindsym $mod+m exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
 
 # kill focused window
 bindsym $mod+Shift+q kill
-
-# Setup polybar for the bar
-bar {
-	i3bar_command $HOME/.config/polybar/launch.sh
-}
 
 # Audio controls for silly buttons
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
