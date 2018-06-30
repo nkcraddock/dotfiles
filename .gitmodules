@@ -1,9 +1,0 @@
-[submodule "home/.bashrc.common.d/powerline"]
-	path = home/.bashrc.common.d/powerline
-	url = git://github.com/Lokaltog/powerline.git
-[submodule "home/.vim/bundle/ctrlp.vim"]
-	path = home/.vim/bundle/ctrlp.vim
-	url = git://github.com/kien/ctrlp.vim.git
-[submodule "home/.vim/bundle/Vundle.vim"]
-	path = home/.vim/bundle/Vundle.vim
-	url = git://github.com/gmarik/Vundle.vim

@@ -1,6 +1,0 @@
-require 'rake'
-
-Object.send(:include, Rake::DSL)
-sh "git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim"
-sh "vim +BundleInstall +qall 2&> /dev/null"
-
