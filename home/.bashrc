@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # If not running interactively, don't do anything
-[ -z "$PS1" ] && retur
+[ -z "$PS1" ] && return
 
 # run local bash stuff (pc-specific aliases and such)
 if [ -f ~/.bash_local ]; then
