@@ -1,0 +1,156 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	/35c89c8/
+$LANG	home/.vimrc	/^let $LANG='en'$/;"	v
+<C-h>	home/.vimrc	/^nnoremap <C-h> <C-w>h$/;"	m
+<C-j>	home/.vimrc	/^nnoremap <C-j> <C-w>j$/;"	m
+<C-k>	home/.vimrc	/^nnoremap <C-k> <C-w>k$/;"	m
+<C-l>	home/.vimrc	/^nnoremap <C-l> <C-w>l$/;"	m
+<F8>	home/.vimrc	/^nmap <F8> :TagbarToggle<CR>$/;"	m
+<LEFT>	home/.vimrc	/^nmap <silent> <LEFT> :cprev<CR>$/;"	m
+<Leader><Space>	home/.vimrc	/^map <silent> <Leader><Space> :nohlsearch<Bar>:echo<CR>$/;"	m
+<Leader>md	home/.vimrc	/^map <silent> <Leader>md :LivedownToggle<CR>$/;"	m
+<LocalLeader><LocalLeader>	home/.vimrc	/^map <silent> <LocalLeader><LocalLeader> :ls<CR>$/;"	m
+<LocalLeader>ag	home/.vimrc	/^  map <silent> <LocalLeader>ag :Ag<CR>$/;"	m
+<LocalLeader>jj	home/.vimrc	/^map <silent> <LocalLeader>jj  :%w !pbcopy<CR>$/;"	m
+<LocalLeader>jk	home/.vimrc	/^map <silent> <LocalLeader>jk  :r !pbpaste<CR>$/;"	m
+<LocalLeader>mm	home/.vimrc	/^map <silent> <LocalLeader>mm :make!<CR>$/;"	m
+<LocalLeader>mr	home/.vimrc	/^map <silent> <LocalLeader>mr :make! run<CR>$/;"	m
+<LocalLeader>mt	home/.vimrc	/^map <silent> <LocalLeader>mt :make! test<CR>$/;"	m
+<LocalLeader>ne	home/.vimrc	/^map <silent> <LocalLeader>ne :call g:WorkaroundNERDTreeFind()<CR>$/;"	m
+<LocalLeader>nt	home/.vimrc	/^map <silent> <LocalLeader>nt :call g:WorkaroundNERDTreeToggle()<CR>$/;"	m
+<LocalLeader>rr	home/.vimrc	/^map <silent> <LocalLeader>rr :!rake<CR>$/;"	m
+<LocalLeader>rt	home/.vimrc	/^map <silent> <LocalLeader>rt :!rake test<CR>$/;"	m
+<RIGHT>	home/.vimrc	/^nmap <silent> <RIGHT> :cnext<CR>$/;"	m
+<S-Down>	home/.vimrc	/^nnoremap <S-Down> <C-w>-$/;"	m
+<S-Left>	home/.vimrc	/^nnoremap <S-Left> <C-w><$/;"	m
+<S-Right>	home/.vimrc	/^nnoremap <S-Right> <C-w>>$/;"	m
+<S-Up>	home/.vimrc	/^nnoremap <S-Up> <C-w>+$/;"	m
+AdjustWindowHeight	home/.vimrc	/^function! AdjustWindowHeight(minheight, maxheight)$/;"	f
+Default setup (vim, go, node, ctags, misc dev tools)	README.md	/^# Default setup (vim, go, node, ctags, misc dev tools)$/;"	c
+Full install with errthang (default + i3wm, chrome, docker and other apps I use)	README.md	/^# Full install with errthang (default + i3wm, chrome, docker and other apps I use)$/;"	c
+Installation	README.md	/^Installation$/;"	s
+Minimal install (just vim)	README.md	/^# Minimal install (just vim)$/;"	c
+Tag,Tags	home/.ctags	/^--regex-javascript=\/\\\/\\\/[ \\t]*(FIXME|TODO)[ \\t]*\\:*(.*)\/\\1\/T,Tag,Tags\/$/;"	k	langdef:less
+Tag,Tags	home/.ctags	/^--regex-javascript=\/\\\/\\\/[ \\t]*(FIXME|TODO)[ \\t]*\\:*(.*)\/\\1\/T,Tag,Tags\/$/;"	k	langdef:scss
+WorkaroundNERDTreeFind	home/.vimrc	/^function! g:WorkaroundNERDTreeFind()$/;"	f
+WorkaroundNERDTreeToggle	home/.vimrc	/^function! g:WorkaroundNERDTreeToggle()$/;"	f
+__git_eread	home/.git-prompt.sh	/^__git_eread ()$/;"	f
+__git_ps1	home/.git-prompt.sh	/^__git_ps1 ()$/;"	f
+__git_ps1_colorize_gitstring	home/.git-prompt.sh	/^__git_ps1_colorize_gitstring ()$/;"	f
+__git_ps1_show_upstream	home/.git-prompt.sh	/^__git_ps1_show_upstream ()$/;"	f
+case classes	home/.ctags	/^--regex-scala=\/^[ \\t]*((abstract|final|sealed|implicit|lazy)[ \\t]*)*(private|protected)?[ \\t/;"	k	langdef:scala
+case objects	home/.ctags	/^--regex-scala=\/^[ \\t]*((abstract|final|sealed|implicit|lazy)[ \\t]*)*(private|protected)?[ \\t/;"	k	langdef:scala
+class	home/.ctags	/^--regex-JavaScript=\/([A-Za-z0-9._$\\#]+)[ \\t]*[=][ \\t]*([A-Za-z0-9._'"\\$\\#]+)extend\\(\/\\1/;"	k	langdef:js
+class,classes	home/.ctags	/^--regex-html=\/class="([A-Za-z0-9_-]+)"\/\\1\/c,class,classes\/$/;"	k	langdef:scss
+class,classes	home/.ctags	/^--regex-less=\/^[ \\t&]*\\.([A-Za-z0-9_-]+)\/\\1\/c,class,classes\/$/;"	k	langdef:less
+class,classes	home/.ctags	/^--regex-scss=\/^([A-Za-z0-9_-]*)*\\.([A-Za-z0-9_-]+) *[,{]\/\\2\/c,class,classes\/$/;"	k	langdef:scss
+class,classes	home/.ctags	/^--regex-scss=\/^[ \\t&]+\\.([A-Za-z0-9_-]+) *[,{]\/\\1\/c,class,classes\/$/;"	k	langdef:scss
+class,constant	home/.ctags	/^--regex-ruby=\/(^|[:;])[ \\t]*([A-Z][[:alnum:]_]+) *=\/\\2\/c,class,constant\/$/;"	k	langdef:js
+classes	home/.ctags	/^--regex-scala=\/^[ \\t]*((abstract|final|sealed|implicit|lazy)[ \\t]*)*(private|protected)?[ \\t/;"	k	langdef:scala
+coffee	home/.ctags	/^--langdef=coffee$/;"	l
+constants	home/.ctags	/^--regex-scala=\/^[ \\t]*((abstract|final|sealed|implicit|lazy)[ \\t]*)*val[ \\t]+([a-zA-Z0-9_]+)/;"	k	langdef:scala
+dotfiles	README.md	/^dotfiles$/;"	c
+function	home/.ctags	/^--regex-coffee=\/^[ \\t]*([A-Za-z.]+)[ \\t]+=.*->.*$\/\\1\/f,function\/$/;"	k	langdef:coffee
+function,aasm_event	home/.ctags	/^--regex-ruby=\/(^|;)[ \\t]*event\\(? *:([[:alnum:]_]+)\/\\2!\/f,function,aasm_event\/$/;"	k	langdef:js
+function,aasm_event	home/.ctags	/^--regex-ruby=\/(^|;)[ \\t]*event\\(? *:([[:alnum:]_]+)\/\\2?\/f,function,aasm_event\/$/;"	k	langdef:js
+function,aasm_event	home/.ctags	/^--regex-ruby=\/(^|;)[ \\t]*event\\(? *:([[:alnum:]_]+)\/\\2\/f,function,aasm_event\/$/;"	k	langdef:js
+function,association	home/.ctags	/^--regex-ruby=\/(^|;)[ \\t]*(has_many|belongs_to|has_one|has_and_belongs_to_many)\\(? *:([[:alnum/;"	k	langdef:js
+function,exposure	home/.ctags	/^--regex-ruby=\/(^|;)[ \\t]*expose\\(? *:([[:alnum:]_]+)\/\\2\/f,function,exposure\/$/;"	k	langdef:js
+function,named_scope	home/.ctags	/^--regex-ruby=\/(^|;)[ \\t]*(named_)?scope\\(? *:([[:alnum:]_]+)\/\\3\/f,function,named_scope\/$/;"	k	langdef:js
+g:NERDTreeIgnore	home/.vimrc	/^let g:NERDTreeIgnore=['build$','tags']$/;"	v
+g:SuperTabDefaultCompletionType	home/.vimrc	/^let g:SuperTabDefaultCompletionType = '<C-n>'$/;"	v
+g:ag_working_path_mode	home/.vimrc	/^  let g:ag_working_path_mode = "r"$/;"	v
+g:airline#extensions#tabline#enabled	home/.vimrc	/^let g:airline#extensions#tabline#enabled = 0$/;"	v
+g:airline_powerline_fonts	home/.vimrc	/^let g:airline_powerline_fonts = 1$/;"	v
+g:airline_theme	home/.vimrc	/^let g:airline_theme='tomorrow'$/;"	v
+g:ctrlp_extensions	home/.vimrc	/^let g:ctrlp_extensions = ['tag' ]$/;"	v
+g:ctrlp_max_files	home/.vimrc	/^let g:ctrlp_max_files=0$/;"	v
+g:ctrlp_show_hidden	home/.vimrc	/^let g:ctrlp_show_hidden = 1$/;"	v
+g:ctrlp_user_command	home/.vimrc	/^  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'$/;"	v
+g:ctrlp_user_command	home/.vimrc	/^  let g:ctrlp_user_command = [$/;"	v
+g:ctrlp_working_path_mode	home/.vimrc	/^let g:ctrlp_working_path_mode = 'r'$/;"	v
+g:easytags_async	home/.vimrc	/^let g:easytags_async = 1$/;"	v
+g:easytags_file	home/.vimrc	/^let g:easytags_file = ".\/tags"$/;"	v
+g:easytags_opts	home/.vimrc	/^let g:easytags_opts = ['--tag-relative=yes']$/;"	v
+g:go_auto_type_info	home/.vimrc	/^let g:go_auto_type_info = 1$/;"	v
+g:go_autodetect_gopath	home/.vimrc	/^let g:go_autodetect_gopath = 1$/;"	v
+g:go_fmt_command	home/.vimrc	/^let g:go_fmt_command = "goimports"$/;"	v
+g:go_highlight_extra_types	home/.vimrc	/^let g:go_highlight_extra_types = 1$/;"	v
+g:go_highlight_fields	home/.vimrc	/^let g:go_highlight_fields = 1$/;"	v
+g:go_highlight_function_calls	home/.vimrc	/^let g:go_highlight_function_calls = 1$/;"	v
+g:go_highlight_functions	home/.vimrc	/^let g:go_highlight_functions = 1$/;"	v
+g:go_highlight_generate_tags	home/.vimrc	/^let g:go_highlight_generate_tags = 1$/;"	v
+g:go_highlight_types	home/.vimrc	/^let g:go_highlight_types = 1$/;"	v
+g:go_info_mode	home/.vimrc	/^let g:go_info_mode = 'gocode'$/;"	v
+g:go_list_type	home/.vimrc	/^let g:go_list_type = "quickfix"$/;"	v
+g:go_metalinter_autosave	home/.vimrc	/^let g:go_metalinter_autosave = 1$/;"	v
+g:go_metalinter_autosave_enabled	home/.vimrc	/^let g:go_metalinter_autosave_enabled = ['vet']$/;"	v
+g:livedown_browser	home/.vimrc	/^let g:livedown_browser = "google-chrome"$/;"	v
+g:livedown_open	home/.vimrc	/^let g:livedown_open = 1$/;"	v
+g:livedown_port	home/.vimrc	/^let g:livedown_port = 9010$/;"	v
+g:tagbar_autoclose	home/.vimrc	/^let g:tagbar_autoclose = 1$/;"	v
+g:tagbar_compact	home/.vimrc	/^let g:tagbar_compact = 1$/;"	v
+g:ycm_autoclose_preview_window_after_completion	home/.vimrc	/^let g:ycm_autoclose_preview_window_after_completion = 1$/;"	v
+g:ycm_autoclose_preview_window_after_insertion	home/.vimrc	/^let g:ycm_autoclose_preview_window_after_insertion = 1$/;"	v
+g:ycm_key_list_previous_completion	home/.vimrc	/^let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']$/;"	v
+g:ycm_key_list_select_completion	home/.vimrc	/^let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']$/;"	v
+gR	home/.vimrc	/^nnoremap gR gD:%s\/<C-R>\/\/\/gc<left><left><left>$/;"	m
+go	home/.vimrc	/^augroup go$/;"	a
+gr	home/.vimrc	/^nnoremap gr gd[{V%::s\/<C-R>\/\/\/gc<left><left><left>$/;"	m
+heading,headings	home/.ctags	/^--regex-markdown=\/^(#+[ \\t]+.*)\/\\1\/h,heading,headings\/$/;"	k	langdef:markdown
+heading1	home/.ctags	/^--regex-markdown=\/^#[ \\t]+(.*)\/\\1\/h,heading1\/$/;"	k	langdef:markdown
+heading2	home/.ctags	/^--regex-markdown=\/^##[ \\t]+(.*)\/\\1\/h,heading2\/$/;"	k	langdef:markdown
+heading3	home/.ctags	/^--regex-markdown=\/^###[ \\t]+(.*)\/\\1\/h,heading3\/$/;"	k	langdef:markdown
+id,ids	home/.ctags	/^--regex-html=\/id="([A-Za-z0-9_-]+)"\/\\1\/i,id,ids\/$/;"	k	langdef:scss
+id,ids	home/.ctags	/^--regex-less=\/^[ \\t&]*#([A-Za-z0-9_-]+)\/\\1\/i,id,ids\/$/;"	k	langdef:less
+id,ids	home/.ctags	/^--regex-scss=\/^(.*)*\\#([A-Za-z0-9_-]+) *[,{]\/\\2\/i,id,ids\/$/;"	k	langdef:scss
+id,ids	home/.ctags	/^--regex-scss=\/^[ \\t&]*#([A-Za-z0-9_-]+)\/\\1\/i,id,ids\/$/;"	k	langdef:scss
+install_apt_packages	setup	/^function install_apt_packages() {$/;"	f
+install_ctags	setup	/^function install_ctags() {$/;"	f
+install_devtools	setup	/^function install_devtools() {$/;"	f
+install_docker	setup	/^function install_docker() {$/;"	f
+install_dotfiles	setup	/^function install_dotfiles() {$/;"	f
+install_golang	setup	/^function install_golang() {$/;"	f
+install_node	setup	/^function install_node() {$/;"	f
+install_python	setup	/^function install_python() {$/;"	f
+install_uiapps	setup	/^function install_uiapps() {$/;"	f
+install_vim_plugins	setup	/^function install_vim_plugins() {$/;"	f
+js	home/.ctags	/^--langdef=js$/;"	l
+less	home/.ctags	/^--langdef=less$/;"	l
+main	setup	/^function main() {$/;"	f
+markdown	home/.ctags	/^--langdef=markdown$/;"	l
+media,media	home/.ctags	/^--regex-scss=\/^[ \\t]*@media\\s+([A-Za-z0-9_-]+)\/\\1\/d,media,media\/$/;"	k	langdef:scss
+media,medias	home/.ctags	/^--regex-less=\/^[ \\t]*@media\\s+([A-Za-z0-9_-]+)\/\\1\/m,media,medias\/$/;"	k	langdef:less
+method	home/.ctags	/^--regex-JavaScript=\/([A-Za-z0-9._$\\(\\)]+)[ \\t]*[:=][ \\t]*function[ \\t]*\\(\/\\1\/m,method\/$/;"	k	langdef:js
+methods	home/.ctags	/^--regex-scala=\/^[ \\t]*((abstract|final|sealed|implicit|lazy)[ \\t]*)*def[ \\t]+([a-zA-Z0-9_]+)/;"	k	langdef:scala
+mixin,mixins	home/.ctags	/^--regex-scss=\/^[ \\t]*@mixin ([A-Za-z0-9_-]+)\/\\1\/m,mixin,mixins\/$/;"	k	langdef:scss
+myUndoDir	home/.vimrc	/^    let myUndoDir = expand(vimDir . '\/undodir')$/;"	v
+objects	home/.ctags	/^--regex-scala=\/^[ \\t]*((abstract|final|sealed|implicit|lazy)[ \\t]*)*(private|protected)?[ \\t/;"	k	langdef:scala
+packages	home/.ctags	/^--regex-scala=\/^[ \\t]*package[ \\t]+([a-zA-Z0-9_.]+)\/\\1\/p,packages\/$/;"	k	langdef:scala
+property	home/.ctags	/^--regex-JavaScript=\/([A-Za-z0-9._$\\#\\(\\)]+)[ \\t]*[:][ \\t]*([A-Za-z0-9._\\-\\#\\'\\"]+)[ \\/;"	k	langdef:js
+property	home/.ctags	/^--regex-JavaScript=\/([A-Za-z0-9._$\\#\\(\\)]+)[ \\t]*[:][ \\t]*([A-Za-z0-9\\'\\"._\\-\\#\\(]+)[/;"	k	langdef:js
+s:build_go_files	home/.vimrc	/^function! s:build_go_files()$/;"	f
+scala	home/.ctags	/^--langdef=scala$/;"	l
+scss	home/.ctags	/^--langdef=scss$/;"	l
+start_mongo	home/bin/dstart	/^function start_mongo() {$/;"	f
+start_redis	home/bin/dstart	/^function start_redis() {$/;"	f
+svn_remote=	home/.git-prompt.sh	/^	svn_remote=()$/;"	f
+tag,tags	home/.ctags	/^--regex-less=\/^[ \\t]*(([A-Za-z0-9_-]+[ \\t\\n,]+)+)\\{\/\\1\/t,tag,tags\/$/;"	k	langdef:less
+tag,tags	home/.ctags	/^--regex-scss=\/(^(.*, *)([A-Za-z0-9_-]+)) *[,|\\{]\/\\3\/t,tag,tags\/$/;"	k	langdef:scss
+tag,tags	home/.ctags	/^--regex-scss=\/(^([A-Za-z0-9_-])*([A-Za-z0-9_-]+)) *[,|\\{]\/\\1\/t,tag,tags\/$/;"	k	langdef:scss
+tag,tags	home/.ctags	/^--regex-scss=\/(^([^\\\/\\\/])*)[ \\t]+([A-Za-z0-9_-]+)) *[,|\\{]\/\\3\/t,tag,tags\/$/;"	k	langdef:scss
+tag,tags	home/.ctags	/^--regex-scss=\/(^[ \\t]+([A-Za-z0-9_-]+)) *[,|\\{]\/\\1\/t,tag,tags\/$/;"	k	langdef:scss
+traits	home/.ctags	/^--regex-scala=\/^[ \\t]*((abstract|final|sealed|implicit|lazy)[ \\t]*)*(private|protected)?[ \\t/;"	k	langdef:scala
+types	home/.ctags	/^--regex-scala=\/^[ \\t]*type[ \\t]+([a-zA-Z0-9_]+)\/\\1\/T,types\/$/;"	k	langdef:scala
+usage	setup	/^function usage() {$/;"	f
+variable	home/.ctags	/^--regex-JavaScript=\/var ([A-Za-z0-9._$\\#]+)[ \\t]*[=][ \\t]*([A-Za-z0-9._'"\\$\\#\\[\\{]+)[,|;/;"	k	langdef:js
+variable	home/.ctags	/^--regex-coffee=\/^[ \\t]*([A-Za-z.]+)[ \\t]+=[^->\\n]*$\/\\1\/v,variable\/$/;"	k	langdef:coffee
+variable,variables	home/.ctags	/^--regex-less=\/^[ \\t]*(@[A-Za-z0-9_-]+):\/\\1\/v,variable,variables\/$/;"	k	langdef:less
+variable,variables	home/.ctags	/^--regex-scss=\/^[ \\t]*\\$([A-Za-z0-9_-]+)\/\\1\/v,variable,variables\/$/;"	k	langdef:scss
+variables	home/.ctags	/^--regex-scala=\/^[ \\t]*((abstract|final|sealed|implicit|lazy)[ \\t]*)*var[ \\t]+([a-zA-Z0-9_]+)/;"	k	langdef:scala
+vimDir	home/.vimrc	/^let vimDir = '$HOME\/.vim'$/;"	v
