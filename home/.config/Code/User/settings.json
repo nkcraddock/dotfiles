@@ -1,0 +1,78 @@
+{
+    // hide everything
+    "workbench.welcome.enabled": false,
+    "workbench.editor.showTabs": false,
+    "workbench.activityBar.visible": false,
+    "explorer.openEditors.visible": 0,
+
+    // Controls if the diff editor shows the diff side by side or inline
+    "diffEditor.renderSideBySide": false,
+
+    // Insert spaces when pressing Tab
+    "editor.insertSpaces": true,
+
+    // Minimap
+    "editor.minimap.enabled": true,
+
+    // A multiplier to be used on the `deltaX` and `deltaY` of mouse wheel scroll events
+    "editor.mouseWheelScrollSensitivity": 5,
+
+    // Controls whether the editor should render whitespace characters
+    "editor.renderWhitespace": "all",
+
+    // Extensions to be installed by the Extension Manager
+    "extension-manager.extensions": [
+        "PeterJausovec.vscode-docker",
+        "ms-vscode.Go",
+        "christian-kohler.path-intellisense",
+        "dbaeumer.vscode-eslint",
+        "EditorConfig.EditorConfig",
+        "eg2.tslint",
+        "esbenp.prettier-vscode",
+        "mikestead.dotenv",
+        "tht13.python",
+        "vscodevim.vim"
+    ],
+
+    "zenMode.fullScreen": false,
+
+    // When enabled, will trim trailing whitespace when you save a file
+    "files.trimTrailingWhitespace": true,
+
+    // Default end of line character
+    "files.eol": "\n",
+
+    // Glob patterns for excluding folders and files
+    "files.exclude": {
+            "**/*.build": true,
+            "**/*.git": true,
+            "**/*.err": true,
+            "**/*.rec": true,
+            "**/*.log": true,
+            "**/*.evt": true,
+            "**/buildfre.*": true,
+            "**/buildchk.*": true,
+            "**/.DS_Store": true
+        },
+
+    // Glob patterns for excluding files and folders in searches
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true,
+        ".build/**": true,
+        "out*/**": true,
+        "i18n/**": true,
+        "extensions/**/out/**": true,
+        "*.min.js": true
+    },
+
+    // Enable linter for TypeScript files
+    "tslint.enable": true,
+    "files.associations": {
+        "deque": "cpp",
+        "list": "cpp",
+        "vector": "cpp",
+        "xstring": "cpp"
+    }
+}
+

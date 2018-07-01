@@ -189,24 +189,6 @@ function install_vscode() {
     sudo apt-get update
     sudo apt-get install -y code
   fi
-
-  # Install extensions
-  VSCODE_EXTENSIONS="
-    PeterJausovec.vscode-docker
-    ms-vscode.Go
-    christian-kohler.path-intellisense
-    dbaeumer.vscode-eslint
-    EditorConfig.EditorConfig
-    eg2.tslint
-    esbenp.prettier-vscode
-    mikestead.dotenv
-    tht13.python
-    vscodevim.vim
-  "
-
-  for extension in $VSCODE_EXTENSIONS; do
-    code --install-extension $extension
-  done
 }
 
 function install_docker() {
