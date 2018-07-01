@@ -80,3 +80,15 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+function hs() {
+  if ! $(command -v homeshick &> /dev/null); then
+    echo "homeshick not installed"
+    return 1
+  fi
+
+  if $1 = "update"; then
+    homeshick pull dotfiles && homeshick link dotfiles
+  else
+    homeshick $@
+  fi
+}

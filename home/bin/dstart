@@ -30,8 +30,8 @@ for svc in $@; do
         echo "${svc} already exists. starting it."
         docker start ${svc}
       else
-        mkdir -p "$HOME/$svc"
-        echo "creating redis"
+        mkdir -p "$DATA/${svc}"
+        echo "creating ${svc}"
         $fn
       fi
     else
