@@ -162,20 +162,33 @@ function install_dotfiles() {
 function install_uiapps() {
   install_apt_packages "i3 pavucontrol scrot xclip"
 
-  # install whatever drivers they recommend for devices
-  sudo ubuntu-drivers autoinstall
+  # For the nvidia 1070, we need 390
+  if [[ $(ubuntu-drivers devices | grep -q nvidia-driver) -eq 0 ]]; then
+    if [[ $(dpkg -s nvidia-driver-390 &> /dev/null) -ne 0 ]]; then
+      sudo add-apt-repository -y ppa:graphics-drivers/ppa
+      sudo apt-get update
+      sudo apt-get install -y nvidia-driver-390
+    fi
+  fi
 
   # google chrome
-  wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-  echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
-  sudo apt-get update
-  sudo apt-get install -y google-chrome-stable
+  if ! command -v google-chrome; then 
+    wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+    echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
+    sudo apt-get update
+    sudo apt-get install -y google-chrome-stable
+    echo "BROWSER=$(which google-chrome)" >> ~/.bash_local
+  fi
 
   # slack
-  sudo snap install slack --classic
+  if ! command -v slack; then
+    sudo snap install slack --classic
+  fi
 
   # spotify
-  sudo snap install spotify
+  if ! command -v spotify; then
+    sudo snap install spotify
+  fi
 }
 
 function install_vscode() {
@@ -209,8 +222,10 @@ function install_vscode() {
 }
 
 function install_docker() {
-  curl -o- https://get.docker.com | bash
-  sudo usermod -aG docker $(whoami)
+  if ! $(command -v docker); then
+    curl -o- https://get.docker.com | bash
+    sudo usermod -aG docker $(whoami)
+  fi
 }
 
 function install_devtools() {
@@ -220,19 +235,23 @@ function install_devtools() {
   fi
 
   # gcloud cli
-  source /etc/lsb-release
-  export CLOUD_SDK_REPO="cloud-sdk-${DISTRIB_CODENAME}"
-  echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-  curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-  sudo apt-get update && sudo apt-get install -y google-cloud-sdk
+  if ! $(command -v gcloud &> /dev/null); then
+    source /etc/lsb-release
+    export CLOUD_SDK_REPO="cloud-sdk-${DISTRIB_CODENAME}"
+    echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+    sudo apt-get update && sudo apt-get install -y google-cloud-sdk
+  fi
 
   # kubectl cli
-  curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-  chmod +x ./kubectl
-  sudo mv ./kubectl /usr/local/bin/kubectl
+  if ! $(command -v kubectl &> /dev/null); then
+    curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+    chmod +x ./kubectl
+    sudo mv ./kubectl /usr/local/bin/kubectl
 
-  # kubectl shell autocompletion
-  echo "source <(kubectl completion bash)" >> ~/.bash_local
+    # kubectl shell autocompletion
+    echo "source <(kubectl completion bash)" >> ~/.bash_local
+  fi
 }
 
 
