@@ -147,6 +147,12 @@ function install_dotfiles() {
 function install_uiapps() {
   install_apt_packages "i3 pavucontrol scrot xclip"
 
+  # if we're on a GTX 1070, force nvidia-390
+  if $(ubuntu-drivers devices | grep GTX\ 1070); then
+    sudo add-apt-repository -y ppa:graphics-drivers/ppa
+    sudo apt-get install -y nvidia-driver-390
+  fi
+
   # google chrome
   wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
   echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
