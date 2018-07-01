@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Add ~/bin to path
+PATH="$HOME/bin:$PATH"
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 

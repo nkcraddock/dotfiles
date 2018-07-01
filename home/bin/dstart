@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # vim: filetype=sh
 #
-# run google chrome. this exists mostly for dmenu
+# create/start some standard local services i use for development
 
 DATA=$HOME/data
 
@@ -30,12 +30,14 @@ for svc in $@; do
         echo "${svc} already exists. starting it."
         docker start ${svc}
       else
-        mkdir -p $DATA
+        mkdir -p "$HOME/$svc"
         echo "creating redis"
         $fn
       fi
     else
       echo "${svc} already running"
     fi
+  else
+    echo "${svc} doesnt exist"
   fi
 done
