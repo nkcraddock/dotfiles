@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# vim: filetype=sh
+#
+# run google chrome. this exists mostly for dmenu
+
+DATA=$HOME/data
+
+function start_mongo() {
+  docker run -d --name mongo \
+    -p 27017:27017 \
+    -v $DATA/mongo \
+    mongo
+}
+
+function start_redis() {
+  docker run -d --name redis \
+   -p 6379 \
+   -v $DATA/redis:/data \
+   redis \
+   redis-server --appendonly yes
+}
+
+for svc in $@; do
+  fn="start_${svc}"
+  type -t $fn &> /dev/null
+  if [[ $? -eq 0 ]]; then
+    if [ ! "$(docker ps -q -f name=${svc})" ]; then
+      # if it alrady exists start it
+      if [ "$(docker ps -aq -f status=exited -f name=${svc})" ]; then
+        echo "${svc} already exists. starting it."
+        docker start ${svc}
+      else
+        mkdir -p $DATA
+        echo "creating redis"
+        $fn
+      fi
+    else
+      echo "${svc} already running"
+    fi
+  fi
+done
