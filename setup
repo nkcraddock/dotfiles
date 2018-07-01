@@ -8,18 +8,18 @@ set -o nounset
 
 TMP_FILE_PREFIX=${TMPDIR:-/tmp}/prog.$$
 GOLANG_VERSION="1.10.3"
+PYTHON_VERSION="3.6.6"
 
 DEFAULT_APT_PACKAGES="
 apt-utils
-wget
-git
 build-essential
 curl
+git
 jq
 mercurial
 silversearcher-ag
-wget
 vim
+wget
 "
 
 DEFAULT_VIM_PLUGINS="
@@ -117,6 +117,25 @@ function install_golang() {
   fi
 }
 
+function install_python() {
+  install_apt_packages "libreadline-dev libssl-dev libbz2-dev zlib1g-dev"
+  if [[ -n $(type -t pyenv) ]]; then
+    curl -LSs https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
+    {
+      echo 'export PATH="$HOME/.pyenv/bin:$PATH"'
+      echo 'eval "$(pyenv init -)"'
+      echo 'eval "$(pyenv virtualenv-init -)"'
+    } >> "$HOME/.bash_local"
+
+    export PATH="$HOME/.pyenv/bin:$PATH"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+
+    pyenv install 3.6.6 && pyenv global 3.6.6
+    pip install httpie httpie-jwt-auth
+  fi
+}
+
 function install_ctags() {
   command -v nvm &> /dev/null
   if [ $? -ne 0 ]; then
@@ -172,6 +191,11 @@ function install_docker() {
 }
 
 function install_devtools() {
+  # grab httpie if we didnt install python
+  if [[ ! $PACKAGES = *"python"* ]]; then
+    install_apt_packages "httpie"
+  fi
+
   # gcloud cli
   source /etc/lsb-release
   export CLOUD_SDK_REPO="cloud-sdk-${DISTRIB_CODENAME}"
@@ -190,7 +214,7 @@ function install_devtools() {
 
 
 function main() {
-  PACKAGES="node golang ctags dotfiles devtools"
+  PACKAGES="node golang python ctags dotfiles devtools"
   local -r OPTS=':hfm'
   while builtin getopts ${OPTS} opt "${@}"; do
 
@@ -199,7 +223,7 @@ function main() {
         ;;
 
       f) # 
-        PACKAGES="node golang ctags uiapps docker devtools"
+        PACKAGES="${PACKAGES} uiapps docker"
         ;;
 
       m) # minimal
@@ -241,5 +265,7 @@ trap "exit 1" 1 2 3 13 15
 
 main "$@"
 
-
+echo "---------------------------------------------------"
+echo "All finished. You'll want to source your bashrc."
+echo "$ source ~/.bashrc"
 
