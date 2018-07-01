@@ -86,5 +86,5 @@ alias hs="homeshick"
 
 # random aliases
 alias st="git status"
-alias api="http --auth-type=jwt --auth="$API_TOKEN"
+alias api='http --auth-type=jwt --auth="$API_TOKEN"'
 
