@@ -188,6 +188,23 @@ function install_vscode() {
     # install code
     sudo apt-get update
     sudo apt-get install -y code
+
+    # install all the extensions
+    VSCODE_EXTENSIONS="
+      PeterJausovec.vscode-docker
+      ms-vscode.Go
+      christian-kohler.path-intellisense
+      dbaeumer.vscode-eslint
+      EditorConfig.EditorConfig
+      eg2.tslint
+      esbenp.prettier-vscode
+      mikestead.dotenv
+      tht13.python
+      vscodevim.vim
+    "
+    for ext in $VSCODE_EXTENSIONS; do
+      code --install-extension $ext
+    done
   fi
 }
 

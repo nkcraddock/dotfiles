@@ -20,19 +20,6 @@
     // Controls whether the editor should render whitespace characters
     "editor.renderWhitespace": "all",
 
-    // Extensions to be installed by the Extension Manager
-    "extension-manager.extensions": [
-        "PeterJausovec.vscode-docker",
-        "ms-vscode.Go",
-        "christian-kohler.path-intellisense",
-        "dbaeumer.vscode-eslint",
-        "EditorConfig.EditorConfig",
-        "eg2.tslint",
-        "esbenp.prettier-vscode",
-        "mikestead.dotenv",
-        "tht13.python",
-        "vscodevim.vim"
-    ],
 
     "zenMode.fullScreen": false,
 
