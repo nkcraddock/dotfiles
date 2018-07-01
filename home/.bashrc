@@ -80,15 +80,11 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-function hs() {
-  if ! $(command -v homeshick &> /dev/null); then
-    echo "homeshick not installed"
-    return 1
-  fi
+# aliases for homeshick
+alias hs-update="homeshick pull dotfiles && homeshick link dotfiles"
+alias hs="homeshick"
 
-  if $1 = "update"; then
-    homeshick pull dotfiles && homeshick link dotfiles
-  else
-    homeshick $@
-  fi
-}
+# random aliases
+alias st="git status"
+alias api="http --auth-type=jwt --auth="$API_TOKEN"
+
