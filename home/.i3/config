@@ -1,0 +1,204 @@
+# Mod key - Windows Key
+set $mod Mod4
+
+# Hide titles and borders
+for_window [class="^.*"] border pixel 2
+new_window 1pixel
+
+font pango: Hack 14
+
+####################################################################
+# Color Scheme
+set $base00 #002b36
+set $base01 #073642
+set $base02 #586e75
+set $base03 #657b83
+set $base04 #839496
+set $base05 #93a1a1
+set $base06 #eee8d5
+set $base07 #fdf6e3
+set $base08 #dc322f
+set $base09 #cb4b16
+set $base0A #b58900
+set $base0B #859900
+set $base0C #2aa198
+set $base0D #268bd2
+set $base0E #6c71c4
+set $base0F #d33682
+####################################################################
+# Status Bar 
+bar {
+    status_command i3status -c ~/.i3/.i3status.conf
+
+    colors {
+        background $base00
+        separator  $base03
+        statusline $base06
+
+        # State             Border  BG      Text
+        focused_workspace   $base0A $base0A $base00
+        active_workspace    $base0A $base00 $base0A
+        inactive_workspace  $base00 $base00 $base0A
+        urgent_workspace    $base08 $base08 $base00
+        binding_mode        $base00 $base0A $base00
+    }
+}
+
+####################################################################
+# Window colors Base16
+# Property Name         Border  BG      Text    Indicator Child Border
+client.focused          $base00 $base0D $base00 $base0D $base07
+client.focused_inactive $base01 $base01 $base05 $base03 $base01
+client.unfocused        $base01 $base00 $base05 $base01 $base01
+client.urgent           $base08 $base08 $base00 $base08 $base08
+client.placeholder      $base00 $base00 $base05 $base00 $base00
+client.background       $base07
+
+# dont move focus with the mouse
+focus_follows_mouse no
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start dmenu (a program launcher)
+bindsym $mod+d exec dmenu_run -i -fn 'Monofur-16' -sb "$base01" -nb "$base00" -nf "$base05" 
+
+# lock the screen
+bindsym $mod+Ctrl+l "exec i3lock "
+exec_always --no-startup-id xautolock -time 10 -locker 'i3lock -c $lockcolor'
+
+# change focus with hjkl
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# change focus with arrow keys
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window with hjkl
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# move focused window with arrow keys
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+Ctrl+h split h
+
+# split in vertical orientation
+bindsym $mod+Ctrl+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# resize window with hjkl or arrow keys
+mode "resize" {
+	bindsym h resize shrink width 10 px or 10 ppt
+	bindsym j resize grow height 10 px or 10 ppt
+	bindsym k resize shrink height 10 px or 10 ppt
+	bindsym l resize grow width 10 px or 10 ppt
+
+	bindsym Left resize shrink width 10 px or 10 ppt
+	bindsym Down resize grow height 10 px or 10 ppt
+	bindsym Up resize shrink height 10 px or 10 ppt
+	bindsym Right resize grow width 10 px or 10 ppt
+
+	# back to normal: Enter or Escape
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# Rename workspace
+bindsym $mod+m exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# Audio controls for silly buttons
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+
+# Pulse Audio controls 
+bindsym $mod+ctrl+plus exec --no-startup-id pactl set-sink-volume 0 +10% #increase sound volume
+bindsym $mod+ctrl+minus exec --no-startup-id pactl set-sink-volume 0 -10% #decrease sound volume
+bindsym $mod+ctrl+0 exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +10% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -10% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+# Spotify controls
+bindsym $mod+Ctrl+Up exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
+bindsym $mod+Ctrl+Right exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
+bindsym $mod+Ctrl+Left exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+
+
+## custom command shortcuts
+# start a terminal with return or 0
+bindsym $mod+Return exec i3-sensible-terminal
+
+# reset workspace 1 to hacker layout
+bindsym $mod+Ctrl+t workspace 1, focus parent, focus parent, focus parent, kill, exec "~/.i3/wk1"
+
+# start chrome with 9
+bindsym $mod+Ctrl+9 exec google-chrome
+
+# take a screenshot
+bindsym --release $mod+z exec scrot -s ~/Downloads/Screenshot%Y-%m-%d%H:%M:%S.png
+
+# window settings for specific applications
+for_window [class="Pavucontrol"] floating enable
+
