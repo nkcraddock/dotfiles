@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# vim: filetype=sh
+#
+# if ~/.xrandr lists monitors, order them with xrandr
+
+if [[ -f $HOME/.xrandr ]]; then
+  monitors=$(tac $HOME/.xrandr)
+  previous=
+  for mon in $monitors; do
+    if [[ ! -z "$previous" ]]; then
+      xrandr --auto --output $mon --left-of $previous
+      echo "Putting $mon left of $previous"
+    fi
+  previous=$mon
+  done
+fi
