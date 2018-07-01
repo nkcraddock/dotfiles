@@ -95,6 +95,11 @@ function install_node() {
   if [ $? -ne 0 ]; then
     nvm install --lts
   fi
+
+  # gotta have yarn
+  if $(type -t npm &> /dev/null); then
+    npm install -g yarn
+  fi
 }
 
 function install_golang() {
@@ -111,6 +116,10 @@ function install_golang() {
     } >> "$HOME/.bash_local"
     mkdir -p $HOME/go/{src,pkg,bin}
     rm -f /tmp/go.tar.gz
+  fi
+
+  if ! $(command -v drive &> /dev/null); then
+    go get -u github.com/odeke-em/drive/cmd/drive
   fi
 }
 
