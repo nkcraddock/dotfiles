@@ -1,0 +1,201 @@
+#!/bin/bash
+# vim: filetype=sh
+#
+# Install my dev environment including vim, dotfiles, go, node, and ui stuff
+
+# Exit immediately if a command exits with a non-zero status.
+set -o nounset
+
+TMP_FILE_PREFIX=${TMPDIR:-/tmp}/prog.$$
+GOLANG_VERSION="1.10.3"
+
+DEFAULT_APT_PACKAGES="
+apt-utils
+wget
+git
+build-essential
+curl
+jq
+mercurial
+silversearcher-ag
+wget
+vim
+"
+
+DEFAULT_VIM_PLUGINS="
+tpope/vim-fugitive
+tpope/vim-unimpaired
+tpope/vim-surround
+scrooloose/nerdtree
+scrooloose/nerdcommenter
+kien/ctrlp.vim
+rking/ag.vim
+majutsushi/tagbar
+milkypostman/vim-togglelist
+vim-airline/vim-airline
+vim-airline/vim-airline-themes
+lifepillar/vim-solarized8
+elzr/vim-json
+digitaltoad/vim-jade
+fatih/vim-go
+vim-ruby/vim-ruby
+elixir-lang/vim-elixir
+avakhov/vim-yaml
+shime/vim-livedown
+leafgarland/typescript-vim
+"
+
+function usage() {
+  echo "Usage: init [OPTION]
+    -f          full (install everything)
+    -m          minimal install (just vim)
+  "
+}
+
+function install_apt_packages() {
+  for apt_pkg in $@; do
+    dpkg -s $apt_pkg &> /dev/null
+    if [ $? -ne 0 ]; then
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq -y $apt_pkg
+    fi
+  done
+}
+
+function install_vim_plugins() {
+  mkdir -p ~/.vim/autoload ~/.vim/bundle
+  # make sure we have pathogen
+  if [ ! -e ~/.vim/autoload/pathogen.vim ]; then
+    curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+  fi
+
+  # install all the plugins
+  for plugin in $@; do
+    local plugin_name="${plugin##*/}"
+
+    if [ ! -d $HOME/.vim/bundle/$plugin_name ]; then
+      git clone --depth=1 "https://github.com/$plugin" "$HOME/.vim/bundle/$plugin_name"
+    fi
+  done
+}
+
+function install_node() {
+  type -t "nvm" &> /dev/null
+  if [ -f $HOME/.nvm/nvm.sh ]; then
+    source $HOME/.nvm/nvm.sh
+  else
+    # Install the latest version of NVM
+    LATEST_NVM=$(curl -s https://api.github.com/repos/creationix/nvm/releases/latest | jq -r '.tag_name')
+    curl -LSs https://raw.githubusercontent.com/creationix/nvm/$LATEST_NVM/install.sh | bash
+    # Add NVM to bash_local so it'll work in the shell
+    echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.bash_local
+    echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> ~/.bash_local
+    # load NVM so we can use it to install node
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  fi
+
+  type -t node &> /dev/null
+  if [ $? -ne 0 ]; then
+    nvm install --lts
+  fi
+}
+
+function install_golang() {
+  if [ ! -d "$HOME/.go" ] && [ ! -d "$HOME/go" ]; then
+    wget -q "https://storage.googleapis.com/golang/go${GOLANG_VERSION}.linux-amd64.tar.gz" -O /tmp/go.tar.gz
+    tar -C "$HOME" -xzf /tmp/go.tar.gz
+    mv "$HOME/go" "$HOME/.go"
+    {
+      echo '# GoLang'
+      echo 'export GOROOT=$HOME/.go'
+      echo 'export PATH=$PATH:$GOROOT/bin'
+      echo 'export GOPATH=$HOME/go'
+      echo 'export PATH=$PATH:$GOPATH/bin'
+    } >> "$HOME/.bash_local"
+    mkdir -p $HOME/go/{src,pkg,bin}
+    rm -f /tmp/go.tar.gz
+  fi
+}
+
+function install_ctags() {
+  command -v nvm &> /dev/null
+  if [ $? -ne 0 ]; then
+    git clone -q --depth=1 https://github.com/universal-ctags/ctags.git /tmp/ctags
+    install_apt_packages autotools-dev autoconf pkg-config
+    cd /tmp/ctags
+    ./autogen.sh
+    ./configure
+    make
+    sudo make install
+    cd -
+    rm -rf /tmp/ctags
+  fi
+
+  install_vim_plugins "ludovicchabant/vim-gutentags.git"
+}
+
+function install_dotfiles() {
+  if [ ! -d "$HOME/.homesick/repos/homeshick" ]; then 
+    git clone --depth=1 https://github.com/andsens/homeshick.git $HOME/.homesick/repos/homeshick
+    echo 'source $HOME/.homesick/repos/homeshick/homeshick.sh' >> ~/.bash_local
+    source $HOME/.homesick/repos/homeshick/homeshick.sh
+    yes | homeshick clone -b nkcraddock/dotfiles
+    yes | homeshick link /dotfiles
+  fi
+}
+
+function install_i3() {
+  echo "i3wm package not done yet"
+}
+
+function main() {
+  PACKAGES="node golang ctags dotfiles"
+  local -r OPTS=':hfm'
+  while builtin getopts ${OPTS} opt "${@}"; do
+
+    case $opt in
+      h) usage ; exit 0
+        ;;
+
+      f) # 
+        PACKAGES="node golang ctags i3"
+        ;;
+
+      m) # minimal
+        PACKAGES=""
+        ;;
+
+
+      \?)
+        echo ${opt} ${OPTIND} 'is an invalid option' >&2;
+        usage;
+        exit ${INVALID_OPTION}
+        ;;
+      esac
+    done
+
+    # update apt packages
+    sudo apt-get update -q
+
+    install_apt_packages "${DEFAULT_APT_PACKAGES}"
+
+    for pkg in ${PACKAGES}; do
+      if [[ -n "$(type -t install_$pkg)" ]]; then
+        install_$pkg
+      fi
+    done
+
+    install_vim_plugins "${DEFAULT_VIM_PLUGINS}"
+    install_dotfiles
+
+
+    exit 0
+  }
+
+
+trap "exit 1" 1 2 3 13 15
+
+main "$@"
+
+
+
