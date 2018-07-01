@@ -120,6 +120,7 @@ install_node	setup	/^function install_node() {$/;"	f
 install_python	setup	/^function install_python() {$/;"	f
 install_uiapps	setup	/^function install_uiapps() {$/;"	f
 install_vim_plugins	setup	/^function install_vim_plugins() {$/;"	f
+install_vscode	setup	/^function install_vscode() {$/;"	f
 js	home/.ctags	/^--langdef=js$/;"	l
 less	home/.ctags	/^--langdef=less$/;"	l
 main	setup	/^function main() {$/;"	f

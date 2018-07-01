@@ -136,7 +136,7 @@ function install_python() {
 function install_ctags() {
   if ! command -v ctags; then
     git clone -q --depth=1 https://github.com/universal-ctags/ctags.git /tmp/ctags
-    # install_apt_packages autotools-dev autoconf pkg-config
+    install_apt_packages autotools-dev autoconf pkg-config
     cd /tmp/ctags
     ./autogen.sh
     ./configure
@@ -178,6 +178,37 @@ function install_uiapps() {
   sudo snap install spotify
 }
 
+function install_vscode() {
+  if ! $(command -v code); then 
+    # set up the microsoft repo
+    curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+    sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
+    sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
+
+    # install code
+    sudo apt-get update
+    sudo apt-get install -y code
+  fi
+
+  # Install extensions
+  VSCODE_EXTENSIONS="
+    PeterJausovec.vscode-docker
+    ms-vscode.Go
+    christian-kohler.path-intellisense
+    dbaeumer.vscode-eslint
+    EditorConfig.EditorConfig
+    eg2.tslint
+    esbenp.prettier-vscode
+    mikestead.dotenv
+    tht13.python
+    vscodevim.vim
+  "
+
+  for extension in $VSCODE_EXTENSIONS; do
+    code --install-extension $extension
+  done
+}
+
 function install_docker() {
   curl -o- https://get.docker.com | bash
   sudo usermod -aG docker $(whoami)
@@ -216,7 +247,7 @@ function main() {
         ;;
 
       f) # 
-        PACKAGES="${PACKAGES} uiapps docker"
+        PACKAGES="${PACKAGES} uiapps docker vscode"
         ;;
 
       m) # minimal
