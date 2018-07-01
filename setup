@@ -118,8 +118,8 @@ function install_golang() {
 }
 
 function install_python() {
-  install_apt_packages "libreadline-dev libssl-dev libbz2-dev zlib1g-dev"
-  if [[ -n $(type -t pyenv) ]]; then
+  if ! $(type -t pyenv); then
+    install_apt_packages "libreadline-dev libssl-dev libbz2-dev zlib1g-dev"
     curl -LSs https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
     {
       echo 'export PATH="$HOME/.pyenv/bin:$PATH"'
