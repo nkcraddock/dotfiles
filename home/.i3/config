@@ -1,3 +1,6 @@
+# try to arrange windows
+exec --no-startup-id ~/.i3/startup
+
 # Mod key - Windows Key
 set $mod Mod4
 
