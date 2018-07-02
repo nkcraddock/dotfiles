@@ -175,7 +175,7 @@ function install_dotfiles() {
 }
 
 function install_uiapps() {
-  install_apt_packages "i3 pavucontrol scrot xclip vim-gnome"
+  install_apt_packages "i3 pavucontrol scrot xclip vim-gnome fonts-powerline"
 
   # For the nvidia 1070, we need 390
   if [[ $(ubuntu-drivers devices | grep -q nvidia-driver) -eq 0 ]]; then
