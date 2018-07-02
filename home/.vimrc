@@ -3,6 +3,8 @@ set nocompatible
 
 execute pathogen#infect()
 
+filetype plugin indent on
+
 "----------------------------------------------------------------------
 " Searching
 "----------------------------------------------------------------------
@@ -112,6 +114,8 @@ set t_ut=
 "----------------------------------------------------------------------
 " Colors and Pretties
 "----------------------------------------------------------------------
+
+set termguicolors
 
 " Try to use solarized8 if we have it
 try
@@ -265,7 +269,7 @@ let g:easytags_opts = ['--tag-relative=yes']
 "----------
 let g:airline#extensions#tabline#enabled = 0
 let g:airline_powerline_fonts = 1
-let g:airline_theme='tomorrow'
+" let g:airline_theme='solarized'
 
 "----------
 " vim-go
