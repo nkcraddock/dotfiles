@@ -6,11 +6,13 @@
 # Authors:
 #   Ben O'Hara <bohara@gmail.com>
 #
+#
+
+# Local user config
+[include]
+  path = ~/.gitconfig_local
 
 # Global Config
-[user]
-    name = "Nathan Craddock"
-    email = "nkcraddock@gmail.com"
 
 [branch "master"]
     remote = origin
@@ -48,7 +50,7 @@
     branch = magenta
 
 [core]
-    editor = /usr/bin/vim -v
+    editor = /usr/bin/vim
     pager = less -FRSX
     whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 
