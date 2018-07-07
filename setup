@@ -266,6 +266,8 @@ function install_devtools() {
 
     # kubectl shell autocompletion
     echo "source <(kubectl completion bash)" >> ~/.bash_local
+    # the k alias
+    echo "alias k='kubectl'" >> ~/.bash_local
   fi
 }
 
