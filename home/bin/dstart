@@ -5,14 +5,14 @@
 
 DATA=$HOME/data
 
-function start_mongo() {
+function dstart_mongo() {
   docker run -d --name mongo \
     -p 27017:27017 \
     -v $DATA/mongo \
     mongo
 }
 
-function start_redis() {
+function dstart_redis() {
   docker run -d --name redis \
    -p 6379 \
    -v $DATA/redis:/data \
@@ -20,8 +20,38 @@ function start_redis() {
    redis-server --appendonly yes
 }
 
+function dstart_eventstore() {
+  docker run -d --name eventstore \
+    -p 2113:2113 \
+    -p 1113:1113 \
+    -v $DATA/eventstore:/var/lib/eventstore \
+    eventstore/eventstore:release-4.1.0
+
+  echo "EventStore listening at http://localhost:1113"
+  echo "Username: admin"
+  echo "Password: changeit"
+}
+
+function __dstart__all() {
+  all=$(docker ps -f "status=exited" | tail -n +2 | grep -o -E '[^ ]+$')
+  for svc in $all; do
+    fn="dstart_${svc}"
+    type -t $fn &> /dev/null
+    if [[ $? -eq 0 ]]; then
+      docker start $svc
+    fi
+  done
+  exit 0
+}
+
+FOUND_SVC=0
+
+if [[ $1 == "all" ]]; then
+  __dstart__all
+fi
+
 for svc in $@; do
-  fn="start_${svc}"
+  fn="dstart_${svc}"
   type -t $fn &> /dev/null
   if [[ $? -eq 0 ]]; then
     if [ ! "$(docker ps -q -f name=${svc})" ]; then
@@ -34,10 +64,23 @@ for svc in $@; do
         echo "creating ${svc}"
         $fn
       fi
+
+      FOUND_SVC+=1
     else
       echo "${svc} already running"
     fi
   else
-    echo "${svc} doesnt exist"
+    echo "NOT FOUND: $svc"
   fi
 done
+
+if [[ $FOUND_SVC -eq 0 ]]; then
+  echo "Usage: dstart [all|services]"
+  echo "   all - start all services that are initialized"
+  echo
+  echo "Available services:"
+  dstart_options=$(typeset -F | grep dstart_ | cut -d "_" -f 2)
+  for opt in $dstart_options; do
+    echo "   $opt"
+  done
+fi
