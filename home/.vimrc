@@ -117,9 +117,9 @@ set t_ut=
 
 set termguicolors
 
-" Try to use solarized8 if we have it
+" Try to use PaperColor if we have it
 try
-	colorscheme solarized8
+	colorscheme PaperColor
 catch
 	try
 		colorscheme desert
@@ -129,6 +129,7 @@ endtry
 
 " Whatever colorscheme we want it should be dark
 set background=dark
+set t_Co=8
 
 " Syntax highlighting
 syntax enable

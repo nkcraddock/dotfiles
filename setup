@@ -11,6 +11,8 @@ DEFAULT_APT_PACKAGES="
 apt-utils
 build-essential
 curl
+fonts-font-awesome
+fonts-powerline
 git
 jq
 mercurial
@@ -31,7 +33,7 @@ majutsushi/tagbar
 milkypostman/vim-togglelist
 vim-airline/vim-airline
 vim-airline/vim-airline-themes
-lifepillar/vim-solarized8
+NLKNguyen/papercolor-theme
 elzr/vim-json
 digitaltoad/vim-jade
 fatih/vim-go
