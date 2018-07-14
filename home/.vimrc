@@ -39,9 +39,6 @@ set nowrap
 " Center the current line
 set so=999
 
-" Draw a vertical line at column 80
-set colorcolumn=80
-
 " Avoid garbled characters in Chinese language windows OS
 let $LANG='en'
 set langmenu=en
@@ -115,21 +112,22 @@ set t_ut=
 " Colors and Pretties
 "----------------------------------------------------------------------
 
-set termguicolors
-
-" Try to use PaperColor if we have it
+" Try to use solarized8 if we have it
+set t_Co=256
 try
-	colorscheme PaperColor
+	colorscheme solarized8
 catch
 	try
-		colorscheme desert
+		"colorscheme desert
 	catch
 	endtry
 endtry
 
+
+" 
+
 " Whatever colorscheme we want it should be dark
 set background=dark
-set t_Co=8
 
 " Syntax highlighting
 syntax enable
@@ -270,7 +268,7 @@ let g:easytags_opts = ['--tag-relative=yes']
 "----------
 let g:airline#extensions#tabline#enabled = 0
 let g:airline_powerline_fonts = 1
-" let g:airline_theme='solarized'
+let g:airline_theme = "minimalist"
 
 "----------
 " vim-go
@@ -392,4 +390,3 @@ if has('persistent_undo')
     let &undodir = myUndoDir
     set undofile
 endif
-

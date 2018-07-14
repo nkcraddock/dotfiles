@@ -33,7 +33,6 @@ majutsushi/tagbar
 milkypostman/vim-togglelist
 vim-airline/vim-airline
 vim-airline/vim-airline-themes
-NLKNguyen/papercolor-theme
 elzr/vim-json
 digitaltoad/vim-jade
 fatih/vim-go
@@ -42,12 +41,14 @@ elixir-lang/vim-elixir
 avakhov/vim-yaml
 shime/vim-livedown
 leafgarland/typescript-vim
+vim-syntastic/vim-syntastic
+editorconfig/editorconfig-vim
 "
 
 function usage() {
   echo "Usage: init [OPTION]
-    -f          full (install everything)
-    -m          minimal install (just vim)
+  -f          full (install everything)
+  -m          minimal install (just vim)
   "
 }
 
@@ -144,7 +145,7 @@ function install_python() {
 
     pyenv install 3.6.6 && pyenv global 3.6.6
   fi
-  
+
   if _has pip && ! _has http; then
     pip install httpie httpie-jwt-auth
   fi
@@ -221,16 +222,16 @@ function install_vscode() {
 
     # install all the extensions
     VSCODE_EXTENSIONS="
-      PeterJausovec.vscode-docker
-      ms-vscode.Go
-      christian-kohler.path-intellisense
-      dbaeumer.vscode-eslint
-      EditorConfig.EditorConfig
-      eg2.tslint
-      esbenp.prettier-vscode
-      mikestead.dotenv
-      tht13.python
-      vscodevim.vim
+    PeterJausovec.vscode-docker
+    ms-vscode.Go
+    christian-kohler.path-intellisense
+    dbaeumer.vscode-eslint
+    EditorConfig.EditorConfig
+    eg2.tslint
+    esbenp.prettier-vscode
+    mikestead.dotenv
+    tht13.python
+    vscodevim.vim
     "
     for ext in $VSCODE_EXTENSIONS; do
       code --install-extension $ext
@@ -297,29 +298,29 @@ function main() {
         usage;
         exit ${INVALID_OPTION}
         ;;
-      esac
-    done
+    esac
+  done
 
-    # update apt packages
-    sudo apt-get update -q
+  # update apt packages
+  sudo apt-get update -q
 
-    # upgrade everything (no balls)
-    sudo apt-get upgrade -y
+  # upgrade everything (no balls)
+  sudo apt-get upgrade -y
 
-    install_apt_packages "${DEFAULT_APT_PACKAGES}"
+  install_apt_packages "${DEFAULT_APT_PACKAGES}"
 
-    for pkg in ${PACKAGES}; do
-      if _has "install_$pkg"; then
-        install_$pkg
-      fi
-    done
+  for pkg in ${PACKAGES}; do
+    if _has "install_$pkg"; then
+      install_$pkg
+    fi
+  done
 
-    install_vim_plugins "${DEFAULT_VIM_PLUGINS}"
-    install_dotfiles
+  install_vim_plugins "${DEFAULT_VIM_PLUGINS}"
+  install_dotfiles
 
 
-    exit 0
-  }
+  exit 0
+}
 
 
 main "$@"
