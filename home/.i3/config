@@ -34,20 +34,21 @@ set $base0F #FF5370
 ####################################################################
 # Status Bar 
 bar {
-    status_command i3status -c ~/.i3/.i3status.conf
+  position top
+  status_command i3status -c ~/.i3/.i3status.conf
 
-    colors {
-        background $base00
-        separator  $base03
-        statusline $base06
+  colors {
+      background $base00
+      separator  $base03
+      statusline $base06
 
-        # State             Border  BG      Text
-        focused_workspace   $base0A $base0A $base00
-        active_workspace    $base0A $base00 $base0A
-        inactive_workspace  $base00 $base00 $base0A
-        urgent_workspace    $base08 $base08 $base00
-        binding_mode        $base00 $base0A $base00
-    }
+      # State             Border  BG      Text
+      focused_workspace   $base0A $base0A $base00
+      active_workspace    $base0A $base00 $base0A
+      inactive_workspace  $base00 $base00 $base0A
+      urgent_workspace    $base08 $base08 $base00
+      binding_mode        $base00 $base0A $base00
+  }
 }
 
 ####################################################################
