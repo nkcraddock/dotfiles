@@ -8,7 +8,8 @@ set $mod Mod4
 for_window [class="^.*"] border pixel 2
 new_window 1pixel
 
-font pango: Hack 14
+# use font-awesome so we can get icons and shit
+font pango:DejaVu Sans Mono, Awesome 8
 
 ####################################################################
 # Color Scheme
