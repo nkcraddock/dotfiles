@@ -9,26 +9,28 @@ for_window [class="^.*"] border pixel 2
 new_window 1pixel
 
 # use font-awesome so we can get icons and shit
-font pango:DejaVu Sans Mono, Awesome 8
+font pango:DejaVu Sans Mono, Awesome 14
 
 ####################################################################
 # Color Scheme
-set $base00 #002b36
-set $base01 #073642
-set $base02 #586e75
-set $base03 #657b83
-set $base04 #839496
-set $base05 #93a1a1
-set $base06 #eee8d5
-set $base07 #fdf6e3
-set $base08 #dc322f
-set $base09 #cb4b16
-set $base0A #b58900
-set $base0B #859900
-set $base0C #2aa198
-set $base0D #268bd2
-set $base0E #6c71c4
-set $base0F #d33682
+#
+set $base00 #263238
+set $base01 #2E3C43
+set $base02 #314549
+set $base03 #546E7A
+set $base04 #B2CCD6
+set $base05 #EEFFFF
+set $base06 #EEFFFF
+set $base07 #FFFFFF
+set $base08 #F07178
+set $base09 #F78C6C
+set $base0A #FFCB6B
+set $base0B #C3E88D
+set $base0C #89DDFF
+set $base0D #82AAFF
+set $base0E #C792EA
+set $base0F #FF5370
+
 ####################################################################
 # Status Bar 
 bar {
@@ -51,7 +53,7 @@ bar {
 ####################################################################
 # Window colors Base16
 # Property Name         Border  BG      Text    Indicator Child Border
-client.focused          $base00 $base0D $base00 $base0D $base07
+client.focused          $base00 $base0D $base00 $base0D $base03
 client.focused_inactive $base01 $base01 $base05 $base03 $base01
 client.unfocused        $base01 $base00 $base05 $base01 $base01
 client.urgent           $base08 $base08 $base00 $base08 $base08
