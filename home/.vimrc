@@ -115,12 +115,12 @@ set t_ut=
 " Try to use solarized8 if we have it
 set t_Co=256
 try
-	colorscheme solarized8
+  colorscheme solarized8
 catch
-	try
-		"colorscheme desert
-	catch
-	endtry
+  try
+    "colorscheme desert
+  catch
+  endtry
 endtry
 
 
@@ -244,9 +244,9 @@ if executable('ag')
 else
   " Let's try this with git
   let g:ctrlp_user_command = [
-      \ '.git', 'cd %s && git ls-files . -co --exclude-standard',
-      \ 'find %s -type f'
-      \ ]
+        \ '.git', 'cd %s && git ls-files . -co --exclude-standard',
+        \ 'find %s -type f'
+        \ ]
 endif
 
 let g:ctrlp_extensions = ['tag' ]
@@ -294,42 +294,42 @@ let g:go_info_mode = 'gocode'
 " Shortcuts
 augroup go
   set updatetime=100
-	autocmd!
+  autocmd!
 
-	" Show by default 4 spaces for a tab
-	autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
+  " Show by default 4 spaces for a tab
+  autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
 
-	" :GoBuild and :GoTestCompile
-	autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+  " :GoBuild and :GoTestCompile
+  autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
 
-	" :GoTest
-	autocmd FileType go nmap <leader>t  <Plug>(go-test)
+  " :GoTest
+  autocmd FileType go nmap <leader>t  <Plug>(go-test)
 
-	" :GoRun
-	autocmd FileType go nmap <leader>r  <Plug>(go-run)
+  " :GoRun
+  autocmd FileType go nmap <leader>r  <Plug>(go-run)
 
-	" :GoDoc
-	autocmd FileType go nmap <Leader <Plug>(go-doc)
+  " :GoDoc
+  autocmd FileType go nmap <Leader <Plug>(go-doc)
 
-	" :GoCoverageToggle
-	autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
+  " :GoCoverageToggle
+  autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
 
-	" :GoInfo
-	autocmd FileType go nmap <Leader>i <Plug>(go-info)
+  " :GoInfo
+  autocmd FileType go nmap <Leader>i <Plug>(go-info)
 
-	" :GoMetaLinter
-	autocmd FileType go nmap <Leader>l <Plug>(go-metalinter)
+  " :GoMetaLinter
+  autocmd FileType go nmap <Leader>l <Plug>(go-metalinter)
 
-	" :GoDef but opens in a vertical split
-	autocmd FileType go nmap <Leader>v <Plug>(go-def-vertical)
-	" :GoDef but opens in a horizontal split
-	autocmd FileType go nmap <Leader>s <Plug>(go-def-split)
+  " :GoDef but opens in a vertical split
+  autocmd FileType go nmap <Leader>v <Plug>(go-def-vertical)
+  " :GoDef but opens in a horizontal split
+  autocmd FileType go nmap <Leader>s <Plug>(go-def-split)
 
-	" :GoAlternate  commands :A, :AV, :AS and :AT
-	autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
-	autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
-	autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
-	autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
+  " :GoAlternate  commands :A, :AV, :AS and :AT
+  autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
+  autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
+  autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
+  autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
 
 augroup END
 
@@ -383,10 +383,10 @@ endif
 
 " Keep undo history across sessions by storing it in a file
 if has('persistent_undo')
-    let myUndoDir = expand(vimDir . '/undodir')
-    " Create dirs
-    call system('mkdir ' . vimDir)
-    call system('mkdir ' . myUndoDir)
-    let &undodir = myUndoDir
-    set undofile
+  let myUndoDir = expand(vimDir . '/undodir')
+  " Create dirs
+  call system('mkdir ' . vimDir)
+  call system('mkdir ' . myUndoDir)
+  let &undodir = myUndoDir
+  set undofile
 endif

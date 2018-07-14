@@ -11,6 +11,6 @@ if [[ -f $HOME/.xrandr ]]; then
       xrandr --auto --output $mon --left-of $previous
       echo "Putting $mon left of $previous"
     fi
-  previous=$mon
+    previous=$mon
   done
 fi
