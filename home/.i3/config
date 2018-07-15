@@ -71,7 +71,7 @@ floating_modifier $mod
 bindsym $mod+d exec dmenu_run -i -fn 'Monofur-16' -sb "$base01" -nb "$base00" -nf "$base05" 
 
 # lock the screen
-bindsym $mod+Ctrl+l "exec i3lock "
+bindsym $mod+Ctrl+l "exec i3lock -c '#000000'"
 exec_always --no-startup-id xautolock -time 10 -locker 'i3lock -c $lockcolor'
 
 # change focus with hjkl
