@@ -32,6 +32,22 @@ function dstart_eventstore() {
   echo "Password: changeit"
 }
 
+function dstart_minecraft() {
+  docker run -d \
+    -p 25565:25565 \
+    -p 8123:8123 \
+    --name minecraft \
+    -e EULA=true \
+    -v $DATA/minecraft:/data \
+    -e DIFFICULTY=hard \
+    -e OPS=lurboneat \
+    -e 'MOTD=This time we win' \
+    -e 'MEMORY=6G' \
+    -e TYPE=SPIGOT \
+    -e VERSION=1.13.1 \
+    itzg/minecraft-server
+}
+
 function __dstart__all() {
   all=$(docker ps -f "status=exited" | tail -n +2 | grep -o -E '[^ ]+$')
   for svc in $all; do

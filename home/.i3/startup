@@ -14,3 +14,7 @@ if [[ -f $HOME/.xrandr ]]; then
     previous=$mon
   done
 fi
+
+if [[ -f $HOME/.Xresources ]]; then
+  xrdb $HOME/.Xresources
+fi
