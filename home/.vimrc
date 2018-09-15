@@ -37,7 +37,7 @@ map <silent> <Leader><Space> :nohlsearch<Bar>:echo<CR>
 set nowrap
 
 " Center the current line
-set so=999
+"set so=999
 
 " Avoid garbled characters in Chinese language windows OS
 let $LANG='en'
@@ -255,13 +255,6 @@ let g:ctrlp_working_path_mode = 'r'
 let g:ctrlp_show_hidden = 1
 
 
-"----------
-" easytags
-"---------- 
-let g:easytags_async = 1
-let g:easytags_file = "./tags"
-let g:easytags_opts = ['--tag-relative=yes']
-
 
 "----------
 " airline
@@ -274,7 +267,6 @@ let g:airline_theme = "minimalist"
 " vim-go
 "----------
 let g:go_fmt_command = "goimports"
-let g:go_autodetect_gopath = 1
 let g:go_list_type = "quickfix"
 
 let g:go_highlight_types = 1
@@ -309,7 +301,7 @@ augroup go
   autocmd FileType go nmap <leader>r  <Plug>(go-run)
 
   " :GoDoc
-  autocmd FileType go nmap <Leader <Plug>(go-doc)
+  autocmd FileType go nmap <Leader>d <Plug>(go-doc)
 
   " :GoCoverageToggle
   autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)

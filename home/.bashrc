@@ -11,9 +11,14 @@ if [ -f ~/.bash_local ]; then
   . ~/.bash_local
 fi
 
+# os-specific switches
+os=`uname`
+if [[ "$os" == 'Linux' ]]; then
+  alias ls='ls --color=auto'
+elif [[ "$os" == 'Darwin' ]]; then
+  alias ls='ls -G'
+fi
 
-# common aliases 
-alias ls='ls --color=auto'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
