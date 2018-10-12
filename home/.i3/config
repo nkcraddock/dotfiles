@@ -1,6 +1,23 @@
 # try to arrange windows
 exec --no-startup-id ~/.i3/startup
 
+# configure monitors
+set $monitor_one DVI-D-0
+set $monitor_two HDMI-0
+
+# configure workspaces
+workspace 1 output $monitor_one
+workspace 2 output $monitor_one
+workspace 3 output $monitor_one
+workspace 4 output $monitor_one
+workspace 5 output $monitor_one
+workspace 6 output $monitor_two
+workspace 7 output $monitor_two
+workspace 8 output $monitor_two
+workspace 9 output $monitor_two
+workspace 10 output $monitor_two
+
+
 # Mod key - Windows Key
 set $mod Mod4
 
@@ -32,7 +49,7 @@ set $base0E #C792EA
 set $base0F #FF5370
 
 ####################################################################
-# Status Bar 
+# Status Bar
 bar {
   position top
   status_command i3status -c ~/.i3/.i3status.conf
@@ -68,7 +85,7 @@ focus_follows_mouse no
 floating_modifier $mod
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run -i -fn 'Monofur-16' -sb "$base01" -nb "$base00" -nf "$base05" 
+bindsym $mod+d exec dmenu_run -i -fn 'Monofur-16' -sb "$base01" -nb "$base00" -nf "$base05"
 
 # lock the screen
 bindsym $mod+Ctrl+l "exec i3lock -c '#000000'"
@@ -179,7 +196,7 @@ bindsym $mod+Shift+q kill
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 
-# Pulse Audio controls 
+# Pulse Audio controls
 bindsym $mod+ctrl+plus exec --no-startup-id pactl set-sink-volume 0 +10% #increase sound volume
 bindsym $mod+ctrl+minus exec --no-startup-id pactl set-sink-volume 0 -10% #decrease sound volume
 bindsym $mod+ctrl+0 exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
