@@ -94,3 +94,6 @@ alias hs="homeshick"
 alias st="git status"
 alias api='http --auth-type=jwt --auth="$API_TOKEN"'
 
+gi() {
+  echo "$*" >> .gitignore
+}
