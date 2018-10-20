@@ -42,19 +42,35 @@
 *color14:      base0F
 *color15:      base07
 
-! urxvt
-URxvt.cursorBlink         : 0
-Urxvt.saveLines           : 50000
+! keep everything always 
+Urxvt.saveLines           : 100000
+
+! Fonts
 URxvt.font                : xft:Liberation Mono for Powerline:size=18
-URxvt.fading              : 20
 URxvt.lineSpace           : 0
 URxvt.letterSpace         : 0
-URxvt.scrollBar           : false
+
+! fade when not focused
+URxvt.fading              : 25
+
+! Turn off UI nonsense
+URxvt.externalBorder      : 0
 URxvt.internalBorder      : 0
+URxvt.cursorBlink         : 0
+URxvt.scrollBar           : false
 URxvt.cursorUnderline     : false
 URxvt.titleBar            : false
-URxvt.url-launcher        : xdg-open
-URxvt.perl-ext-common     : default,keyboard-select,selection-to-clipboard
+
+! Extensions
+! matcher                 - URL highlighting and clicking
+! keyboard-select         - modal vim-style selecting for copy/paste
+! selection-to-clipboard  - copies selections to the right clipboard
+URxvt.perl-ext-common     : default,matcher,keyboard-select,selection-to-clipboard
+
+! vim select mode (alt-escape)
 URxvt.keysym.M-Escape     : perl:keyboard-select:activate
 
-
+! Clickable URLs (ctrl+click)
+URxvt.matcher.rend.0      : Uline fg8
+URxvt.url-launcher        : xdg-open
+URxvt.matcher.button      : C1
