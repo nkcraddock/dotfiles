@@ -24,12 +24,10 @@ alias la='ls -A'
 alias l='ls -CF'
 
 # history
-HISTCONTROL=ignoredups:erasedups  
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTCONTROL=ignoredups:erasedups
+HISTSIZE=100000
+HISTFILESIZE=100000
 shopt -s histappend
-shopt -s histappend
-shopt -s checkwinsize
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -63,8 +61,9 @@ fi
 source ~/.git-prompt.sh
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWCOLORHINTS=1
-PROMPT_DIRTRIM=5
+PROMPT_DIRTRIM=2
 PROMPT_COMMAND='__git_ps1 "\[\e[01;34m\]\w\[\e[0m\]" "\n\h\$ "'
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
 
 unset color_prompt force_color_prompt
 
@@ -97,3 +96,4 @@ alias api='http --auth-type=jwt --auth="$API_TOKEN"'
 gi() {
   echo "$*" >> .gitignore
 }
+

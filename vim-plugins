@@ -20,12 +20,16 @@ vim-ruby/vim-ruby
 elixir-lang/vim-elixir
 avakhov/vim-yaml
 shime/vim-livedown
-leafgarland/typescript-vim
 vim-syntastic/syntastic
 editorconfig/editorconfig-vim
 ludovicchabant/vim-gutentags
 lifepillar/vim-solarized8
 hashivim/vim-terraform
+valloric/youcompleteme
+quramy/tsuquyomi
+jiangmiao/auto-pairs
+HerringtonDarkholme/yats.vim
+mattn/emmet-vim
 "
 
 mkdir -p ~/.vim/autoload ~/.vim/bundle
@@ -41,7 +45,7 @@ for plugin in $VIM_PLUGINS; do
   echo
   if [ ! -d $HOME/.vim/bundle/$plugin_name ]; then
     echo "VIM-PLUGINS: $plugin not found. Installing"
-    git clone --depth=1 "https://github.com/$plugin" "$HOME/.vim/bundle/$plugin_name"
+    git clone --recurse-submodules --depth=1 "https://github.com/$plugin" "$HOME/.vim/bundle/$plugin_name"
   else
     echo "VIM-PLUGINS: $plugin found. Checking for updates"
     cd "$HOME/.vim/bundle/$plugin_name" && git pull

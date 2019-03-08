@@ -27,8 +27,8 @@ set hlsearch
 " Use magic for regular expressions
 set magic
 
-" search highlighting
-map <silent> <Leader><Space> :nohlsearch<Bar>:echo<CR>
+" Stop highlighting search matches
+map <silent> <Space> :nohlsearch<Bar>:echo<CR>
 
 "----------------------------------------------------------------------
 " UI
@@ -46,8 +46,8 @@ source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 
 " wildmenu for vim command completion
-set wildmenu
-set wildmode=longest:full,full
+"set wildmenu
+"set wildmode=longest:full,full
 
 " Highlight the current line
 set cursorline
@@ -218,6 +218,10 @@ let g:terraform_fmt_on_save=1
 " NERDTree ignores
 let g:NERDTreeIgnore=['build$','tags']
 
+" Auto-open nerdtree on open
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
 " NERDTree mappings
 map <silent> <LocalLeader>ne :call g:WorkaroundNERDTreeFind()<CR>
 function! g:WorkaroundNERDTreeFind()
@@ -349,15 +353,45 @@ endfunction
 " tagbar shortcut
 nmap <F8> :TagbarToggle<CR>
 let g:tagbar_autoclose = 1
-let g:tagbar_compact = 1
+"let g:tagbar_compact = 1
+let g:tagbar_show_linenumbers = 1
+let g:tagbar_type_javascript = {
+      \ 'ctagstype': 'javascript',
+      \ 'kinds': [
+      \ 'A:arrays',
+      \ 'P:properties',
+      \ 'T:tags',
+      \ 'O:objects',
+      \ 'G:generator functions',
+      \ 'F:functions',
+      \ 'C:constructors/classes',
+      \ 'M:methods',
+      \ 'V:variables',
+      \ 'I:imports',
+      \ 'E:exports',
+      \ 'S:styled components'
+      \ ]}
+let g:tagbar_type_typescript = {
+  \ 'ctagstype': 'typescript',
+  \ 'kinds': [
+    \ 'c:classes',
+    \ 'n:modules',
+    \ 'f:functions',
+    \ 'v:variables',
+    \ 'v:varlambdas',
+    \ 'm:members',
+    \ 'i:interfaces',
+    \ 'e:enums',
+  \ ]
+\ }
 
 "------------------
 " YouCompleteMe
 "------------------
 " make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
+"let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+"let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+"let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
 
@@ -368,6 +402,14 @@ let g:livedown_open = 1
 let g:livedown_port = 9010
 let g:livedown_browser = "google-chrome"
 map <silent> <Leader>md :LivedownToggle<CR>
+
+"---------
+" quramy/tsuquyomi - typescript integration
+"---------
+let g:tsuquyomi_completion_detail = 1
+let g:tsuquyomi_disable_quickfix = 1
+let g:syntastic_typescript_checkers = ['tsuquyomi'] " You shouldn't use 'tsc' checker.
+autocmd FileType typescript setlocal completeopt+=menu,preview
 
 "----------------------------------------------------------------------
 " Clipboard and undo history
