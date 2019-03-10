@@ -206,12 +206,34 @@ map <silent> <LocalLeader><LocalLeader> :ls<CR>
 let vimDir = '$HOME/.vim'
 let &runtimepath.=','.vimDir
 
+
+"-----------
+" vim-fugitive (git)
+"
+nnoremap <Leader>gg :G<CR>
+nnoremap <Leader>ga :Git add %:p<CR><CR>
+nnoremap <Leader>gr :Git reset %:p<CR><CR>
+nnoremap <Leader>gR :Git reset<CR><CR>
+nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gc :Gcommit -S -v -q<CR>
+nnoremap <Leader>gC :Gcommit -S -v -q %:p<CR>
+nnoremap <Leader>gd :Gvdiff<CR>
+nnoremap <Leader>gl :silent! Glog<CR>:bot copen<CR>
+nnoremap <Leader>gb :Gblame<CR>
+
 "-----------
 " vim-terraform
 "
 let g:terraform_align=1
 let g:terraform_fmt_on_save=1
 
+
+"-----------
+" emmet
+"
+let g:user_emmet_leader_key=','
+
+"
 "-----------
 " NERDTree
 "
@@ -247,7 +269,7 @@ if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ctrlp_user_command = 'ag %s -l --hidden --ignore .git --nocolor -g ""'
 
   " ag is fast enough that CtrlP doesn't need to cache
   "let g:ctrlp_use_caching = 0

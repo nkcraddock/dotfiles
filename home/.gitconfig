@@ -63,6 +63,11 @@
 [merge]
   tool = vimdiff
 
+[blame]
+  date = short
+  blankBoundary = true
+  coloring = highlightRecent
+
 [alias]
     # branch
   b  = branch
