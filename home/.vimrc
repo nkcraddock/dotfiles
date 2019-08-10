@@ -227,11 +227,17 @@ nnoremap <Leader>gb :Gblame<CR>
 let g:terraform_align=1
 let g:terraform_fmt_on_save=1
 
+"-----------
+" heavenshell/vim-tslint
+"
+nnoremap <Leader>ts :TslintFix<CR><ESC>
 
 "-----------
 " emmet
 "
 let g:user_emmet_leader_key=','
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
 
 "
 "-----------

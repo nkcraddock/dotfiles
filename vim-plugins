@@ -27,11 +27,11 @@ lifepillar/vim-solarized8
 hashivim/vim-terraform
 valloric/youcompleteme
 quramy/tsuquyomi
-jiangmiao/auto-pairs
 HerringtonDarkholme/yats.vim
 mattn/emmet-vim
 airblade/vim-gitgutter
 Xuyuanp/nerdtree-git-plugin
+heavenshell/vim-tslint
 "
 
 mkdir -p ~/.vim/autoload ~/.vim/bundle

@@ -63,7 +63,7 @@ GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWCOLORHINTS=1
 PROMPT_DIRTRIM=2
 PROMPT_COMMAND='__git_ps1 "\[\e[01;34m\]\w\[\e[0m\]" "\n\h\$ "'
-export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a"
 
 unset color_prompt force_color_prompt
 
@@ -97,3 +97,13 @@ gi() {
   echo "$*" >> .gitignore
 }
 
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[ -f /home/nathan/.nvm/versions/node/v10.15.3/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash ] && . /home/nathan/.nvm/versions/node/v10.15.3/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[ -f /home/nathan/.nvm/versions/node/v10.15.3/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash ] && . /home/nathan/.nvm/versions/node/v10.15.3/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[ -f /home/nathan/.nvm/versions/node/v10.15.3/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash ] && . /home/nathan/.nvm/versions/node/v10.15.3/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash

@@ -225,9 +225,6 @@ bindsym $mod+Ctrl+Left exec "dbus-send --print-reply --dest=org.mpris.MediaPlaye
 # start a terminal with return or 0
 bindsym $mod+Return exec i3-sensible-terminal
 
-# MOD+CRTL+T - reset workspace 1 to hacker layout
-bindsym $mod+Ctrl+t workspace 1, focus parent, focus parent, focus parent, kill, exec "~/.i3/wk1"
-
 # MOD+CTRL+DELETE - reset current workspace (rip)
 bindsym $mod+Ctrl+Delete focus parent,focus parent, focus parent, focus parent, focus parent, kill
 
@@ -241,8 +238,8 @@ bindsym $mod+Ctrl+9 exec google-chrome
 bindsym --release $mod+z exec scrot -s ~/Downloads/Screenshot%Y-%m-%d%H:%M:%S.png
 
 # window settings for specific applications
-assign [class="Spotify"] $ws8
-assign [class="Slack"] $ws9
+assign [class="Spotify"] $ws3
+assign [class="Slack"] $ws2
 
 # floating apps
 for_window [class="Pavucontrol"] floating enable
