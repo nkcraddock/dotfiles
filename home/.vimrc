@@ -1,9 +1,56 @@
+" set up plugins
+" https://github.com/junegunn/vim-plug
+call plug#begin()
+
+
+" nerdtree for file tree browsing and such
+Plug 'preservim/nerdtree' 
+
+" autocomplete and such
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" nerdtree git status integration
+Plug 'xuyuanp/nerdtree-git-plugin'
+
+" git
+Plug 'tpope/vim-fugitive' 
+
+" surround stuff with other stuff
+Plug 'tpope/vim-surround' 
+
+" syntax checking
+Plug 'scrooloose/syntastic' 
+
+" airline status line
+Plug 'vim-airline/vim-airline'
+
+" commenting/uncommenting 
+Plug 'scrooloose/nerdcommenter'
+
+" file finder buffer etc
+Plug 'kien/ctrlp.vim'
+
+" good-ass search
+Plug 'rking/ag.vim'
+
+" json syntax
+Plug 'elzr/vim-json'
+
+" import editor settings from an editorconfig file
+Plug 'editorconfig/editorconfig-vim'
+
+" yaml syntax
+Plug 'stephpy/vim-yaml'
+
+" colors and pretty nonsense
+Plug 'morhetz/gruvbox'
+Plug 'vim-airline/vim-airline-themes'
+
+
+call plug#end()
+
 "----------------------------------------------------------------------
 set nocompatible
-
-execute pathogen#infect()
-
-filetype plugin indent on
 
 "----------------------------------------------------------------------
 " Searching
@@ -115,7 +162,7 @@ set t_ut=
 " Try to use solarized8 if we have it
 set t_Co=256
 try
-  colorscheme solarized8
+  colorscheme gruvbox
 catch
   try
     "colorscheme desert
@@ -257,10 +304,11 @@ function! g:WorkaroundNERDTreeFind()
 endfunction
 
 "NERDTree Workaround - otherwise if you :bd the nt buffer it gets saddy
-map <silent> <LocalLeader>nt :call g:WorkaroundNERDTreeToggle()<CR>
-function! g:WorkaroundNERDTreeToggle()
-  try | NERDTreeToggle | catch | silent! NERDTree | endtry
-endfunction
+"map <silent> <LocalLeader>nt :call g:WorkaroundNERDTreeToggle()<CR>
+map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
+"function! g:WorkaroundNERDTreeToggle()
+"  try | NERDTreeToggle | catch | silent! NERDTree | endtry
+"endfunction
 
 "-----------
 " ctrlp
