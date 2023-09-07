@@ -55,7 +55,7 @@
   whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 
 [diff]
-  tool = vimdiff
+	tool = vimdiff
 
 [difftool]
   prompt = false

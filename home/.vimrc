@@ -3,6 +3,9 @@
 call plug#begin()
 
 
+" highlights trailing whitespace and removes with :FixWhitespace
+Plug 'bronson/vim-trailing-whitespace' 
+
 " nerdtree for file tree browsing and such
 Plug 'preservim/nerdtree' 
 
@@ -232,6 +235,9 @@ nnoremap gR gD:%s/<C-R>///gc<left><left><left>
 
 """""""""""""""""
 "Custom keymaps
+nmap <silent> gd <Plug>(coc-definition)
+map <silent> <LocalLeader>gw :FixWhiteSpace<CR>
+
 map <silent> <LocalLeader>mm :make!<CR>
 map <silent> <LocalLeader>mt :make! test<CR>
 map <silent> <LocalLeader>mr :make! run<CR>
@@ -264,7 +270,7 @@ nnoremap <Leader>gR :Git reset<CR><CR>
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gc :Gcommit -S -v -q<CR>
 nnoremap <Leader>gC :Gcommit -S -v -q %:p<CR>
-nnoremap <Leader>gd :Gvdiff<CR>
+"nnoremap <Leader>gd :Gvdiff<CR>
 nnoremap <Leader>gl :silent! Glog<CR>:bot copen<CR>
 nnoremap <Leader>gb :Gblame<CR>
 
