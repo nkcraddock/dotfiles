@@ -147,9 +147,16 @@
   rex = remote rm
   rem = remote rename
 
+  # branch cleanup
+  delete-local-merged = "!git fetch && git branch --no-color --merged | egrep -v 'master|dev|main|staging'  | xargs git branch -d"
+
+
 [push]
   default = current
 
 [url "git@github.com:"]
   insteadof = github:
+
+[url "git@github.com:"]
+  insteadof = gh:
 

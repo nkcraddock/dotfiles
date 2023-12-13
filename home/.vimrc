@@ -253,7 +253,13 @@ map <silent> <LocalLeader><LocalLeader> :ls<CR>
 
 "----------------------------------------------------------------------
 " Plugins
-"----------------------------------------------------------------------
+"---------------------------------------------------------------------
+"
+
+"-----------
+" coc
+"
+command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
 
 " Put plugins and dictionaries in this dir (also on Windows)
 let vimDir = '$HOME/.vim'
@@ -498,10 +504,11 @@ autocmd FileType typescript setlocal completeopt+=menu,preview
 "----------------------------------------------------------------------
 
 " Enable to copy to clipboard for operations like yank, delete, change and put
-if has('unnamedplus')
-  set clipboard^=unnamed
-  set clipboard^=unnamedplus
-endif
+"vim.opt.clipboard = 'unnamedplus'
+"if has('unnamedplus')
+  "set clipboard^=unnamed
+  "set clipboard^=unnamedplus
+"endif
 
 " Keep undo history across sessions by storing it in a file
 if has('persistent_undo')
