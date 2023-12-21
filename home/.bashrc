@@ -29,6 +29,10 @@ HISTSIZE=100000
 HISTFILESIZE=100000
 shopt -s histappend
 
+# set editor to vim
+export VISUAL=vim
+export EDITOR=vim
+
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
@@ -96,5 +100,6 @@ alias api='http --auth-type=jwt --auth="$API_TOKEN"'
 gi() {
   echo "$*" >> .gitignore
 }
+
 
 

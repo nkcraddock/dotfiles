@@ -1,8 +1,7 @@
 {
     // hide everything
     "workbench.welcome.enabled": false,
-    "workbench.editor.showTabs": false,
-    "workbench.activityBar.visible": false,
+    "workbench.editor.showTabs": "single",
     "explorer.openEditors.visible": 0,
 
     // Controls if the diff editor shows the diff side by side or inline
@@ -61,6 +60,8 @@
         "vector": "cpp",
         "xstring": "cpp"
     },
-    "explorer.confirmDelete": false
+    "explorer.confirmDelete": false,
+    "workbench.activityBar.location": "hidden",
+    "workbench.colorTheme": "Default Dark Modern"
 }
 
