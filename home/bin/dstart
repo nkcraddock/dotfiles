@@ -5,6 +5,16 @@
 
 DATA=$HOME/data
 
+function dstart_mysql() {
+docker run -d --name mysql \
+  -v $DATA/mysql:/var/lib/mysql \
+  -p 3306:3306 \
+  -e MYSQL_ROOT_PASSWORD=chicken \
+  -e MYSQL_USER=nathan \
+  -e MYSQL_PASSWORD=password \
+  mysql:8
+}
+
 function dstart_mongo() {
   docker run -d --name mongo \
     -p 27017:27017 \
