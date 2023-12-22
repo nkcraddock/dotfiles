@@ -2,7 +2,7 @@
 # vim: filetype=sh
 #
 # Install my dev environment including vim, dotfiles, go, node, and ui stuff
-
+# heheheh
 TMP_FILE_PREFIX=${TMPDIR:-/tmp}/prog.$$
 GOLANG_VERSION="1.10.3"
 PYTHON_VERSION="3.6.6"
