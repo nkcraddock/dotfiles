@@ -2,6 +2,10 @@
 #
 # Install my dev environment
 #
+# natron2 - image editor
+#
+
+
 TMP_FILE_PREFIX=${TMPDIR:-/tmp}/prog.$$
 #GOLANG_VERSION="1.10.3"
 PYTHON_VERSION="3.6.6"
@@ -75,11 +79,10 @@ update_apt() {
 }
 
 add_apt_repo() {
-  EXISTS=$(add-apt-repository -L | grep "$1" &> /dev/null)
+  EXISTS=$(add-apt-repository -L | grep "$1")
   if ! $EXISTS; then
     log "$1"
-    sudo DEBIAN_FRONTEND=noninteractive add-apt-repository $1 > /dev/null
-    sudo DEBIAN_FRONTEND=noninteractive apt-get update -qq -y > /dev/null
+    sudo DEBIAN_FRONTEND=noninteractive add-apt-repository -y $1
   fi
 }
 
@@ -94,6 +97,9 @@ function install_core() {
 }
 
 function install_vim() {
+  if _has "vim"; then
+    sudo apt remove -y vim
+  fi
   add_apt_repo ppa:jonathonf/vim
   install_apt_package vim
 }
@@ -151,9 +157,9 @@ function install_node() {
 }
 
 function _has() {
-  if $(type -t "$1" &> /dev/null); then 
-    return 0 
-  fi 
+  if $(type -t "$1" &> /dev/null); then
+    return 0
+  fi
   return 1
 }
 
@@ -179,6 +185,18 @@ function install_python() {
   fi
 }
 
+function install_ssh-server() {
+  if ! _has ssh-server; then
+    install_apt_package openssh-server
+    if $(sudo ufw status | grep inactive &> /dev/null); then
+      log "Opening firewall"
+      sudo ufw enable
+      sudo ufw allow ssh
+      sudo systemctl restart ssh
+fi
+  fi
+}
+
 function install_terraform() {
   if ! _has terraform; then
     install_apt_packages gnupg software-properties-common
@@ -190,7 +208,7 @@ function install_terraform() {
 }
 
 function install_dotfiles() {
-  if [ ! -d "$HOME/.homesick/repos/homeshick" ]; then 
+  if [ ! -d "$HOME/.homesick/repos/homeshick" ]; then
     $(git clone --depth=1 https://github.com/andsens/homeshick.git $HOME/.homesick/repos/homeshick) > /dev/null
     echo 'source $HOME/.homesick/repos/homeshick/homeshick.sh' >> ~/.bash_local
     source $HOME/.homesick/repos/homeshick/homeshick.sh
@@ -200,17 +218,21 @@ function install_dotfiles() {
 }
 
 function install_docker() {
-  if ! _has docker; then
-    curl -o- https://get.docker.com | bash
+  #if ! _has docker ; then
+    install_apt_package docker.io
     sudo usermod -aG docker $(whoami)
-  fi
+  #fi
 }
 
 function install_awscli() {
-  curl -LSs "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" &> /dev/null
-  unzip awscliv2.zip > /dev/null
-  sudo ./aws/install > /dev/null
-  rm awscliv2.zip > /dev/null
+  AWS_TMP="/tmp/aws"
+  mkdir -p $AWS_TMP
+  log "downloading awscli zip from amazon"
+
+  curl -LSs "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "$AWS_TMP/awscliv2.zip" &> /dev/null
+  unzip $AWS_TMP/awscliv2.zip -d $AWS_TMP > /dev/null
+  sudo $AWS_TMP/aws/install > /dev/null
+  rm -rf /tmp/aws
 }
 
 
@@ -244,8 +266,8 @@ function install_devtools() {
 }
 
 function run_package_setup() {
-   if [[ ! $INSTALLED_PACKAGES = *"$pkg"* ]]; then 
-      log "installing $pkg"
+    log "installing $pkg"
+    if [[ ! $DRY_RUN == "YES" ]]; then
       CURRENT_PACKAGE=$pkg
       install_$pkg
       echo $pkg >> ~/.scraw_installed
@@ -254,44 +276,54 @@ function run_package_setup() {
 
 function main() {
   PACKAGES="$DEFAULT_PACKAGES"
-  local -r OPTS=':hfm'
-  while builtin getopts ${OPTS} opt "${@}"; do
 
-    case $opt in
-      h) usage ; exit 0
+  for i in "$@"; do
+    case $i in
+      -e=*|--environment=*)
+        TARGET_ENVIRONMENT="${i#*=}"
+        shift # past argument=value
         ;;
-
-      d) # docker
-        PACKAGES="${PACKAGES} docker"
+      -p=*|--package=*)
+        INDIVIDUAL_PACKAGE="${i#*=}"
+        PACKAGES="${INDIVIDUAL_PACKAGE}"
+        shift # past argument=value
         ;;
-
-      f) # full
-        PACKAGES="${PACKAGES}"
+      --default)
+        DEFAULT=YES
+        shift # past argument with no value
         ;;
-
-      m) # minimal
-        PACKAGES=""
+      --update-apt)
+        UPDATE_APT=YES
+        shift
         ;;
-
-
-      \?)
-        echo ${opt} ${OPTIND} 'is an invalid option' >&2;
-        usage;
-        exit ${INVALID_OPTION}
+      --dry-run)
+        DRY_RUN=YES
+        shift
+        ;;
+      -*|--*)
+        echo "Unknown option $i"
+        usage
+        exit 1
+        ;;
+      *)
+        echo ALSO: $i
         ;;
     esac
   done
 
-  # update apt packages
-  update_apt
 
-  # upgrade everything 
-  sudo apt-get upgrade -y
+  if [[ ! $DRY_RUN == "YES" && $UPDATE_APT == "YES" ]]; then
+    # update apt packages
+    update_apt
+
+    # upgrade everything
+    sudo apt-get upgrade -y
+  fi
 
   # look through the selected packages and install them
   for pkg in ${PACKAGES}; do
     CURRENT_PACKAGE=""
-    if _has "install_$pkg"; then
+    if ! _has "install_$pkg" || [ $pkg == "$INDIVIDUAL_PACKAGE" ]  || [[ ! $INSTALLED_PACKAGES = *"$pkg"* ]] ; then
       run_package_setup $pkg
     fi
   done
