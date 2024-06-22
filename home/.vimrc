@@ -1,4 +1,3 @@
-" set up plugins
 " https://github.com/junegunn/vim-plug
 " Install vim-plug if not found
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -30,37 +29,40 @@ Plug 'tpope/vim-dadbod'
 Plug 'kristijanhusak/vim-dadbod-ui'
 
 " highlights trailing whitespace and removes with :FixWhitespace
-Plug 'bronson/vim-trailing-whitespace' 
+Plug 'ntpeters/vim-better-whitespace'
 
 " nerdtree for file tree browsing and such
-Plug 'preservim/nerdtree' 
+Plug 'preservim/nerdtree'
 
 " autocomplete and such
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" syntax for jsx
+Plug 'neoclide/vim-jsx-improve'
 
 " nerdtree git status integration
 Plug 'xuyuanp/nerdtree-git-plugin'
 
 " git
-Plug 'tpope/vim-fugitive' 
+Plug 'tpope/vim-fugitive'
 
 " surround stuff with other stuff
-Plug 'tpope/vim-surround' 
+Plug 'tpope/vim-surround'
 
 " syntax checking
-Plug 'scrooloose/syntastic' 
+Plug 'scrooloose/syntastic'
 
 " airline status line
 Plug 'vim-airline/vim-airline'
 
-" commenting/uncommenting 
+" commenting/uncommenting
 Plug 'scrooloose/nerdcommenter'
 
 " file finder buffer etc
 Plug 'kien/ctrlp.vim'
 
-" good-ass search
-Plug 'rking/ag.vim'
+" ack search (also used by ctrlp)
+Plug 'mileszs/ack.vim'
 
 " json syntax
 Plug 'elzr/vim-json'
@@ -75,6 +77,8 @@ Plug 'stephpy/vim-yaml'
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline-themes'
 
+" vim ack search
+Plug 'mileszs/ack.vim'
 
 call plug#end()
 
@@ -131,7 +135,7 @@ set cursorline
 " Show the line number
 set number
 
-" Ignore files that are stupid that i hate 
+" Ignore files that are stupid that i hate
 set wildignore+=*.o,*~,*.pyc,*.class,*.jar,.git,*.swp,node_modules,*/.DS_Store
 
 " Show line, column. and position
@@ -178,7 +182,7 @@ set tabstop=2
 set linebreak
 set textwidth=250
 
-" Always show 2 status lines 
+" Always show 2 status lines
 set laststatus=2
 
 " terminal clear uses the bg color
@@ -200,7 +204,7 @@ catch
 endtry
 
 
-" 
+"
 
 " Whatever colorscheme we want it should be dark
 set background=dark
@@ -241,11 +245,12 @@ nnoremap <S-Down> <C-w>-
 nnoremap <S-Left> <C-w><
 nnoremap <S-Right> <C-w>>
 
-" quickfix auto-resizer 
+" quickfix auto-resizer
 au FileType qf call AdjustWindowHeight(3, 5)
 function! AdjustWindowHeight(minheight, maxheight)
   exe max([min([line("$"), a:maxheight]), a:minheight]) . "wincmd _"
 endfunction
+nnoremap <silent> <Leader>q :cclose<CR>
 
 
 "----------------------------------------------------------------------
@@ -282,8 +287,19 @@ map <silent> <LocalLeader><LocalLeader> :ls<CR>
 "
 
 "-----------
+" better-whitespace
+"
+let g:better_whitespace_enabled=1
+let g:strip_whitespace_on_save=1
+
+"-----------
 " copilot
 "
+let g:copilot_filetypes = {
+      \ 'gitcommit': v:true,
+      \ 'markdown': v:true,
+      \ 'yaml': v:true
+      \ }
 imap <silent> <C-j> <Plug>(copilot-next)
 imap <silent> <C-k> <Plug>(copilot-previous)
 imap <silent> <C-\> <Plug>(copilot-dismiss)
@@ -338,6 +354,7 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gf <Plug>(coc-fix-current)
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call ShowDocumentation()<CR>
@@ -367,7 +384,7 @@ let &runtimepath.=','.vimDir
 "-----------
 " vim-fugitive (git)
 "
-nnoremap <Leader>gg :G<CR>
+nnoremap <Leader>gg :Git<CR>
 nnoremap <Leader>ga :Git add %:p<CR><CR>
 nnoremap <Leader>gr :Git reset %:p<CR><CR>
 nnoremap <Leader>gR :Git reset<CR><CR>
@@ -390,11 +407,10 @@ let g:terraform_fmt_on_save=1
 nnoremap <Leader>ts :TslintFix<CR><ESC>
 
 "-----------
-" emmet
-"
-let g:user_emmet_leader_key=','
-let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
+" ack.vim
+if executable('ag')
+    let g:ackprg = 'ag --vimgrep'
+endif
 
 "
 "-----------
@@ -413,37 +429,53 @@ function! g:WorkaroundNERDTreeFind()
   try | NERDTreeFind | catch | silent! NERDTree | silent! NERDTreeFind | endtry
 endfunction
 
-"NERDTree Workaround - otherwise if you :bd the nt buffer it gets saddy
-"map <silent> <LocalLeader>nt :call g:WorkaroundNERDTreeToggle()<CR>
 map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
-"function! g:WorkaroundNERDTreeToggle()
-"  try | NERDTreeToggle | catch | silent! NERDTree | endtry
 "endfunction
 
 "-----------
 " ctrlp
 "-----------
+      "let g:ctrlp_custom_ignore = {
+        "\ 'dir':  '\v[\/]\.(git|hg|svn)$',
+        "\ 'dir': 'node_modules\|bower_components',
+        "\ 'file': '\v\.(exe|so|dll)$',
+        "\ 'link': 'some_bad_symbolic_links',
+        "\ }
+      " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+      " modify for spf13
+      let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+      " ag is fast enough that CtrlP doesn't need to cache
+      let g:ctrlp_use_caching = 0
+"nnoremap <c-f> :CtrlPag<cr>
+"vnoremap <c-f> :CtrlPagVisual<cr>
+"nnoremap <leader>ca :CtrlPagLocate
+"nnoremap <leader>cp :CtrlPagPrevious<cr>
+"let g:ctrlp_ag_ignores = '--ignore .git
+    "\ --ignore "deps/*"
+    "\ --ignore "_build/*"
+    "\ --ignore "node_modules/*"'
+
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-if executable('ag')
-  " ag settings
-  let g:ag_working_path_mode = "r"
-  map <silent> <LocalLeader>ag :Ag<CR>
+" if executable('ag')
+"   " ag settings
+"   let g:ag_working_path_mode = "r"
+"   map <silent> <LocalLeader>ag :Ag<CR>
 
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --hidden --ignore .git --nocolor -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  "let g:ctrlp_use_caching = 0
-else
-  " Let's try this with git
-  let g:ctrlp_user_command = [
-        \ '.git', 'cd %s && git ls-files . -co --exclude-standard',
-        \ 'find %s -type f'
-        \ ]
-endif
+"   " Use Ag over Grep
+"   set grepprg=ag\ --nogroup\ --nocolor
+"
+"   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+"   let g:ctrlp_user_command = 'ag %s -l --hidden --ignore .git --nocolor -g ""'
+"
+"   " ag is fast enough that CtrlP doesn't need to cache
+"   "let g:ctrlp_use_caching = 0
+" else
+"   " Let's try this with git
+"   let g:ctrlp_user_command = [
+"         \ '.git', 'cd %s && git ls-files . -co ',
+"         \ 'find %s -type f'
+"         \ ]
+" endif
 
 let g:ctrlp_extensions = ['tag' ]
 let g:ctrlp_max_files=0
@@ -616,4 +648,12 @@ if has('persistent_undo')
   call system('mkdir ' . myUndoDir)
   let &undodir = myUndoDir
   set undofile
+endif
+
+if &term =~ '^screen'
+    " tmux will send xterm-style keys when its xterm-keys option is on
+    execute "set <xUp>=\e[1;*A"
+    execute "set <xDown>=\e[1;*B"
+    execute "set <xRight>=\e[1;*C"
+    execute "set <xLeft>=\e[1;*D"
 endif
