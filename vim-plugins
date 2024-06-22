@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # vim: filetype=sh
 
+#valloric/youcompleteme
+
 VIM_PLUGINS="
 tpope/vim-fugitive
 tpope/vim-unimpaired
@@ -25,7 +27,6 @@ editorconfig/editorconfig-vim
 ludovicchabant/vim-gutentags
 lifepillar/vim-solarized8
 hashivim/vim-terraform
-valloric/youcompleteme
 quramy/tsuquyomi
 HerringtonDarkholme/yats.vim
 mattn/emmet-vim

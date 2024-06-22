@@ -160,3 +160,7 @@
 [url "git@github.com:"]
   insteadof = gh:
 
+[user]
+	email = nkcraddock@gmail.com
+[credential]
+	helper = osxkeychain

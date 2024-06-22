@@ -1,4 +1,5 @@
 #!/bin/bash
+export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # Add ~/bin to path
 PATH="$HOME/bin:$PATH"
@@ -11,12 +12,28 @@ if [ -f ~/.bash_local ]; then
   . ~/.bash_local
 fi
 
+# import and set up the git prompt
+if [ -f ~/.git-prompt.sh ]; then
+  source ~/.git-prompt.sh
+
+  GIT_PS1_SHOWDIRTYSTATE=1
+  GIT_PS1_SHOWCOLORHINTS=1
+  PROMPT_DIRTRIM=2
+  PROMPT_COMMAND='__git_ps1 "\[\e[01;34m\]\w\[\e[0m\]" "\n\h\$ "'
+  export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a"
+fi
+
 # os-specific switches
 os=`uname`
 if [[ "$os" == 'Linux' ]]; then
   alias ls='ls --color=auto'
+  # append history
+  shopt -s histappend
 elif [[ "$os" == 'Darwin' ]]; then
+  # make ls be colors
   alias ls='ls -G'
+
+  #setopt PROMPT_SUBST ; PS1="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a"
 fi
 
 alias ll='ls -alF'
@@ -27,7 +44,6 @@ alias l='ls -CF'
 HISTCONTROL=ignoredups:erasedups
 HISTSIZE=100000
 HISTFILESIZE=100000
-shopt -s histappend
 
 # set editor to vim
 export VISUAL=vim
@@ -37,14 +53,14 @@ export EDITOR=vim
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-  debian_chroot=$(cat /etc/debian_chroot)
-fi
+#if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+#  debian_chroot=$(cat /etc/debian_chroot)
+#fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-  xterm-color) color_prompt=yes;;
-esac
+#case "$TERM" in
+#  xterm-color) color_prompt=yes;;
+#esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
@@ -62,24 +78,18 @@ if [ -n "$force_color_prompt" ]; then
   fi
 fi
 
-source ~/.git-prompt.sh
-GIT_PS1_SHOWDIRTYSTATE=1
-GIT_PS1_SHOWCOLORHINTS=1
-PROMPT_DIRTRIM=2
-PROMPT_COMMAND='__git_ps1 "\[\e[01;34m\]\w\[\e[0m\]" "\n\h\$ "'
-export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a"
 
 unset color_prompt force_color_prompt
 
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-  xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-  *)
-    ;;
-esac
-
+## If this is an xterm set the title to user@host:dir
+##case "$TERM" in
+#  xterm*|rxvt*)
+#    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+#    ;;
+#  *)
+#    ;;
+#esac
+#
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
   test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -100,7 +110,4 @@ alias api='http --auth-type=jwt --auth="$API_TOKEN"'
 gi() {
   echo "$*" >> .gitignore
 }
-
-
-
 

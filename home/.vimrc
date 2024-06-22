@@ -253,16 +253,17 @@ endfunction
 "----------------------------------------------------------------------
 
 " local replace
-nnoremap gr gd[{V%::s/<C-R>///gc<left><left><left>
+"nnoremap gr gd[{V%::s/<C-R>///gc<left><left><left>
 
 " global replace
-nnoremap gR gD:%s/<C-R>///gc<left><left><left>
+"nnoremap gR gD:%s/<C-R>///gc<left><left><left>
 
 
 
 """""""""""""""""
 "Custom keymaps
-
+map <silent> <LocalLeader>ww :tabc<CR>
+map <silent> <LocalLeader>gd :call CocAction('jumpDefinition', 'tab drop')<CR>
 map <silent> <LocalLeader>mm :make!<CR>
 map <silent> <LocalLeader>mt :make! test<CR>
 map <silent> <LocalLeader>mr :make! run<CR>
@@ -402,6 +403,7 @@ autocmd FileType html,css EmmetInstall
 "
 " NERDTree ignores
 let g:NERDTreeIgnore=['build$','tags']
+let g:NERDTreeMinimalMenu=1
 
 " Auto-open nerdtree on open
 "autocmd StdinReadPre * let s:std_in=1
@@ -460,7 +462,12 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme = "minimalist"
 
 "----------
-" vim-go
+" coc-go
+"----------
+autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
+
+"----------
+" vim-go - DISABLED
 "----------
 let g:go_fmt_command = "goimports"
 let g:go_list_type = "quickfix"
@@ -597,6 +604,16 @@ let g:tsuquyomi_disable_quickfix = 1
 let g:syntastic_typescript_checkers = ['tsuquyomi'] " You shouldn't use 'tsc' checker.
 autocmd FileType typescript setlocal completeopt+=menu,preview
 
+
+"---------
+" elxr/vim-json - json syntax 
+"---------
+
+" recognize // commends in json
+autocmd FileType json syntax match Comment +\/\/.\+$+  
+" recognize /*  */ comments in json
+autocmd FileType json syntax match Comment +\/\*.\+\*\/$+
+
 "----------------------------------------------------------------------
 " Clipboard and undo history
 "----------------------------------------------------------------------
@@ -617,3 +634,5 @@ if has('persistent_undo')
   let &undodir = myUndoDir
   set undofile
 endif
+
+
